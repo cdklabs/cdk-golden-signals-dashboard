@@ -109,7 +109,7 @@
       "description": "Runs eslint against the codebase",
       "steps": [
         {
-          "exec": "eslint --ext .ts,.tsx --fix --no-error-on-unmatched-pattern src test build-tools projenrc .projenrc.ts"
+          "exec": "eslint --ext .ts,.tsx --fix --no-error-on-unmatched-pattern src projenrc test build-tools projenrc .projenrc.ts"
         }
       ]
     },
@@ -175,9 +175,6 @@
         },
         {
           "spawn": "package:dotnet"
-        },
-        {
-          "spawn": "package:go"
         }
       ]
     },
@@ -187,15 +184,6 @@
       "steps": [
         {
           "exec": "jsii-pacmak -v --target dotnet"
-        }
-      ]
-    },
-    "package:go": {
-      "name": "package:go",
-      "description": "Create go language bindings",
-      "steps": [
-        {
-          "exec": "jsii-pacmak -v --target go"
         }
       ]
     },
@@ -251,7 +239,7 @@
       "description": "Test rosetta extract",
       "steps": [
         {
-          "exec": "yarn --silent jsii-rosetta extract --strict"
+          "exec": "yarn --silent jsii-rosetta extract"
         }
       ]
     },
@@ -291,25 +279,13 @@
           "exec": "yarn upgrade npm-check-updates"
         },
         {
-          "exec": "npm-check-updates --dep dev --upgrade --target=minor --reject='aws-cdk-lib,constructs,jsii,@aws-cdk/integ-runner,@aws-cdk/integ-tests-alpha'"
-        },
-        {
-          "exec": "npm-check-updates --dep bundle --upgrade --target=minor --reject='aws-cdk-lib,constructs,jsii,@aws-cdk/integ-runner,@aws-cdk/integ-tests-alpha'"
-        },
-        {
-          "exec": "npm-check-updates --dep peer --upgrade --target=minor --reject='aws-cdk-lib,constructs,jsii,@aws-cdk/integ-runner,@aws-cdk/integ-tests-alpha'"
-        },
-        {
-          "exec": "npm-check-updates --dep prod --upgrade --target=minor --reject='aws-cdk-lib,constructs,jsii,@aws-cdk/integ-runner,@aws-cdk/integ-tests-alpha'"
-        },
-        {
-          "exec": "npm-check-updates --dep optional --upgrade --target=minor --reject='aws-cdk-lib,constructs,jsii,@aws-cdk/integ-runner,@aws-cdk/integ-tests-alpha'"
+          "exec": "npm-check-updates --upgrade --target=minor --filter=@types/jest,@types/node,@typescript-eslint/eslint-plugin,@typescript-eslint/parser,cdklabs-projen-project-types,eslint-config-prettier,eslint-import-resolver-node,eslint-import-resolver-typescript,eslint-plugin-import,eslint-plugin-prettier,eslint-plugin-security,eslint,jest-junit,jest,jsii-diff,jsii-docgen,jsii-pacmak,jsii-rosetta,natural-compare-lite,npm-check-updates,prettier,projen,ts-jest,ts-node,typescript,aws-cdk-lib,constructs"
         },
         {
           "exec": "yarn install --check-files"
         },
         {
-          "exec": "yarn upgrade @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser aws-cdk-lib cdklabs-projen-project-types constructs eslint-import-resolver-node eslint-import-resolver-typescript eslint-plugin-import eslint jest-junit jest jsii-diff jsii-docgen jsii-pacmak jsii-rosetta jsii npm-check-updates projen ts-jest ts-node typescript @aws-cdk/integ-runner @aws-cdk/integ-tests-alpha aws-cdk-lib constructs"
+          "exec": "yarn upgrade @types/jest @types/node @typescript-eslint/eslint-plugin @typescript-eslint/parser cdklabs-projen-project-types eslint-config-prettier eslint-import-resolver-node eslint-import-resolver-typescript eslint-plugin-import eslint-plugin-prettier eslint-plugin-security eslint jest-junit jest jsii-diff jsii-docgen jsii-pacmak jsii-rosetta natural-compare-lite npm-check-updates prettier projen ts-jest ts-node typescript aws-cdk-lib constructs"
         },
         {
           "exec": "npx projen"
@@ -327,7 +303,7 @@
       },
       "steps": [
         {
-          "exec": "yarn upgrade "
+          "exec": "yarn upgrade npm-check-updates"
         },
         {
           "exec": "npm-check-updates --filter=cdklabs-projen-project-types,projen --upgrade"
@@ -336,7 +312,7 @@
           "exec": "yarn install --check-files"
         },
         {
-          "exec": "yarn upgrade "
+          "exec": "yarn upgrade cdklabs-projen-project-types projen"
         },
         {
           "exec": "npx projen"
