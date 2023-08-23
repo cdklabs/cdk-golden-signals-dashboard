@@ -2,7 +2,7 @@ import {
   CdklabsConstructLibrary,
   JsiiLanguage,
 } from "cdklabs-projen-project-types";
-import { DependencyType, JsonFile } from "projen";
+import { DependencyType, JsonFile, ReleasableCommits } from "projen";
 const project = new CdklabsConstructLibrary({
   setNodeEngineVersion: false,
   stability: "experimental",
@@ -32,6 +32,9 @@ const project = new CdklabsConstructLibrary({
     distName: "cdklabs.cdk-enterprise-iac",
     module: "cdklabs.cdk_enterprise_iac",
   },
+  // Default is to release only features and fixes. If we don't do this, we'll
+  // release every day because of devDependency updates.
+  releasableCommits: ReleasableCommits.featuresAndFixes(),
 
   // deps: [],                /* Runtime dependencies of this module. */
   // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
