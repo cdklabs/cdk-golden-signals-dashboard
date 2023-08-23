@@ -20,7 +20,6 @@ pids
 *.seed
 *.pid.lock
 lib-cov
-coverage
 *.lcov
 .nyc_output
 build/Release
@@ -36,6 +35,7 @@ jspm_packages/
 junit.xml
 /coverage/
 !/.github/workflows/build.yml
+!/.mergify.yml
 !/.github/workflows/upgrade.yml
 !/.github/pull_request_template.md
 !/.npmrc
@@ -50,5 +50,12 @@ tsconfig.json
 !/API.md
 .jsii.tabl.json
 !/rosetta/default.ts-fixture
-!/.github/workflows/auto-merge.yml
 !/.github/workflows/upgrade-cdklabs-projen-project-types.yml
+!/test/integ/tsconfig.json
+cdk.out
+cdk.context.json
+yarn-error.log
+coverage
+venv
+node_modules
+.DS_Store
