@@ -28,9 +28,10 @@ const project = new CdklabsConstructLibrary({
     JsiiLanguage.DOTNET,
     JsiiLanguage.JAVA,
   ],
+  // jsii publishing
   publishToPypi: {
-    distName: "cdklabs.cdk-enterprise-iac",
-    module: "cdklabs.cdk_enterprise_iac",
+    distName: "cdk-golden-signals-dashboard",
+    module: "cdk-golden-signals-dashboard",
   },
   // Default is to release only features and fixes. If we don't do this, we'll
   // release every day because of devDependency updates.
