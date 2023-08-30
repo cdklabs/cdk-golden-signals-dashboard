@@ -1,7 +1,7 @@
 # CloudWatch Golden Signals Dashboard AWS CDK Construct
 Create Amazon CloudWatch Dashboards for monitoring CloudWatch Metrics of AWS Resources partitioned in golden signals. *Latency, Traffic, Errors, Saturation*
 
-You can create tag based CloudWatch dashbord solution out of the box using this construct! [Here](https://gitlab.aws.dev/jvadaria/golden-signals-dashboard-construct/-/tree/main/dashboard-images) are some screen captures of CloudWatch dashboards created using this cdk construct.
+You can create tag based CloudWatch dashbord solution out of the box using this construct! [Here](https://github.com/cdklabs/cdk-golden-signals-dashboard/tree/main/dashboard-images) are some screen captures of CloudWatch dashboards created using this cdk construct.
 
 # Supported Resource Types
  * AWS::DynamoDB::Table
