@@ -35,7 +35,6 @@ app.synth();
 ```
 
 
-
 # Contributing
 
 See [CONTRIBUTING](./CONTRIBUTING.md) for more information.
