@@ -136,8 +136,8 @@
         }
       },
       "python": {
-        "distName": "cdklabs.cdk-enterprise-iac",
-        "module": "cdklabs.cdk_enterprise_iac"
+        "distName": "cdk-golden-signals-dashboard",
+        "module": "cdk-golden-signals-dashboard"
       },
       "dotnet": {
         "namespace": "CdklabsCdkGoldenSignalsDashboard",
