@@ -34,14 +34,14 @@ const project = new CdklabsConstructLibrary({
     module: "cdk-golden-signals-dashboard",
   },
   publishToNuget: {
-    packageId: 'Cdklabs.GoldenSignalsDashboard',
-    dotNetNamespace: 'Cdklabs.GoldenSignalsDashboard',
+    packageId: "Cdklabs.GoldenSignalsDashboard",
+    dotNetNamespace: "Cdklabs.GoldenSignalsDashboard",
   },
   publishToMaven: {
-    mavenGroupId: 'io.github.cdklabs',
-    javaPackage: 'io.github.cdklabs.goldensignalsdashboard',
-    mavenArtifactId: 'goldensignalsdashboard',
-    mavenEndpoint: 'https://s01.oss.sonatype.org',
+    mavenGroupId: "io.github.cdklabs",
+    javaPackage: "io.github.cdklabs.goldensignalsdashboard",
+    mavenArtifactId: "goldensignalsdashboard",
+    mavenEndpoint: "https://s01.oss.sonatype.org",
   },
   // Default is to release only features and fixes. If we don't do this, we'll
   // release every day because of devDependency updates.
