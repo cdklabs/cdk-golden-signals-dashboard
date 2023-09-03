@@ -42,8 +42,8 @@
     "@aws-cdk/integ-tests-alpha": "2.41.0-alpha.0",
     "@types/jest": "^27",
     "@types/node": "^16",
-    "@typescript-eslint/eslint-plugin": "^6",
-    "@typescript-eslint/parser": "^6",
+    "@typescript-eslint/eslint-plugin": "^5",
+    "@typescript-eslint/parser": "^5",
     "aws-cdk-lib": "2.45.0",
     "cdklabs-projen-project-types": "^0.1.163",
     "constructs": "10.0.5",
@@ -129,10 +129,10 @@
     "outdir": "dist",
     "targets": {
       "java": {
-        "package": "io.github.cdklabs.cdk.golden.signals.dashboard",
+        "package": "io.github.cdklabs.goldensignalsdashboard",
         "maven": {
           "groupId": "io.github.cdklabs",
-          "artifactId": "cdk-golden-signals-dashboard"
+          "artifactId": "goldensignalsdashboard"
         }
       },
       "python": {
@@ -140,8 +140,8 @@
         "module": "cdk-golden-signals-dashboard"
       },
       "dotnet": {
-        "namespace": "CdklabsCdkGoldenSignalsDashboard",
-        "packageId": "CdklabsCdkGoldenSignalsDashboard"
+        "namespace": "Cdklabs.GoldenSignalsDashboard",
+        "packageId": "Cdklabs.GoldenSignalsDashboard"
       }
     },
     "tsc": {
