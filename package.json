@@ -6,6 +6,7 @@
   },
   "scripts": {
     "build": "npx projen build",
+    "bump": "npx projen bump",
     "clobber": "npx projen clobber",
     "compat": "npx projen compat",
     "compile": "npx projen compile",
@@ -24,9 +25,11 @@
     "post-compile": "npx projen post-compile",
     "post-upgrade": "npx projen post-upgrade",
     "pre-compile": "npx projen pre-compile",
+    "release": "npx projen release",
     "rosetta:extract": "npx projen rosetta:extract",
     "test": "npx projen test",
     "test:watch": "npx projen test:watch",
+    "unbump": "npx projen unbump",
     "upgrade": "npx projen upgrade",
     "upgrade-cdklabs-projen-project-types": "npx projen upgrade-cdklabs-projen-project-types",
     "watch": "npx projen watch",
@@ -65,6 +68,7 @@
     "npm-check-updates": "^16",
     "prettier": "^3.0.3",
     "projen": "^0.73.6",
+    "standard-version": "^9",
     "ts-jest": "^27",
     "ts-node": "^10.9.1",
     "typescript": "^5.2.2"
@@ -129,10 +133,10 @@
     "outdir": "dist",
     "targets": {
       "java": {
-        "package": "io.github.cdklabs.cdk.golden.signals.dashboard",
+        "package": "io.github.cdklabs.goldensignalsdashboard",
         "maven": {
           "groupId": "io.github.cdklabs",
-          "artifactId": "cdk-golden-signals-dashboard"
+          "artifactId": "goldensignalsdashboard"
         }
       },
       "python": {
@@ -140,8 +144,8 @@
         "module": "cdk-golden-signals-dashboard"
       },
       "dotnet": {
-        "namespace": "CdklabsCdkGoldenSignalsDashboard",
-        "packageId": "CdklabsCdkGoldenSignalsDashboard"
+        "namespace": "Cdklabs.GoldenSignalsDashboard",
+        "packageId": "Cdklabs.GoldenSignalsDashboard"
       }
     },
     "tsc": {
