@@ -30,7 +30,6 @@ jspm_packages/
 *.tgz
 .yarn-integrity
 .cache
-!/.projenrc.js
 /test-reports/
 junit.xml
 /coverage/
@@ -62,3 +61,4 @@ coverage
 venv
 node_modules
 .DS_Store
+!/.projenrc.ts

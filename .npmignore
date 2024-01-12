@@ -30,3 +30,5 @@ venv
 node_modules
 .DS_Store
 image
+/.gitattributes
+/.projenrc.ts
