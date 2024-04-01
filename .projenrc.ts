@@ -10,7 +10,7 @@ const project = new CdklabsConstructLibrary({
   author: "AWS",
   authorAddress: "aws-cdk-dev@amazon.com",
   projenrcTs: true,
-  cdkVersion: "2.45.0",
+  cdkVersion: "2.134.0",
   rosettaOptions: {
     strict: false,
   },
