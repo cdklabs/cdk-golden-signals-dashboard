@@ -103,6 +103,10 @@ const project = new CdklabsConstructLibrary({
     },
   },
 });
+
+// trick projen so that it doesn't override the version in package.json
+project.tasks.addEnvironment('RELEASE', '1');
+
 project.eslint?.addExtends('plugin:security/recommended');
 const common_exclude = [
   'cdk.out',
