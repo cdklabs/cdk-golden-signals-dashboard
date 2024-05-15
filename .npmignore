@@ -33,3 +33,4 @@ node_modules
 image
 /.gitattributes
 /.projenrc.ts
+/projenrc
