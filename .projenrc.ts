@@ -1,28 +1,55 @@
 import {
   CdklabsConstructLibrary,
   JsiiLanguage,
-} from "cdklabs-projen-project-types";
-import { DependencyType, JsonFile, ReleasableCommits } from "projen";
+} from 'cdklabs-projen-project-types';
+import { DependencyType, JsonFile, github } from 'projen';
 const project = new CdklabsConstructLibrary({
+  cdkVersion: '2.134.0',
   setNodeEngineVersion: false,
-  stability: "experimental",
   private: false,
-  author: "AWS",
-  authorAddress: "aws-cdk-dev@amazon.com",
+  name: 'cdk-golden-signals-dashboard',
+  description:
+    'A construct library that creates CloudWatch Dashboards of AWS Service Golden Signals',
+  keywords: [
+    'aws',
+    'aws-cdk',
+    'constructs',
+    'golden-signals',
+    'cloudwatch',
+    'dashboard',
+  ],
   projenrcTs: true,
-  cdkVersion: "2.134.0",
+  license: 'Apache-2.0',
+  stability: 'experimental',
+
+  repositoryUrl: 'https://github.com/cdklabs/cdk-golden-signals-dashboard.git',
+  defaultReleaseBranch: 'main',
+  author: 'AWS',
+  authorAddress: 'aws-cdk-dev@amazon.com',
+  authorOrganization: true,
+
+  minNodeVersion: '16.16.0',
+  jsiiVersion: '5.1.x',
+
   rosettaOptions: {
     strict: false,
   },
-  defaultReleaseBranch: "main",
-  name: "cdk-golden-signals-dashboard",
-  release: true,
   majorVersion: 1,
   npmignoreEnabled: true,
-  repositoryUrl: "https://github.com/cdklabs/cdk-golden-signals-dashboard.git",
-  license: "Apache-2.0",
-  devDeps: ["eslint-plugin-security", "natural-compare-lite"],
-  eslintOptions: { prettier: true, dirs: ["src", "projenrc"] },
+
+  devDeps: ['eslint-plugin-security', 'natural-compare-lite'],
+  eslintOptions: { prettier: true, dirs: ['src', 'projenrc'] },
+
+  pullRequestTemplateContents: [
+    '',
+    '----',
+    '',
+    '*By submitting this pull request, I confirm that my contribution is made under the terms of the Apache-2.0 license*',
+  ],
+  enablePRAutoMerge: true,
+  releaseToNpm: true,
+  cdklabsPublishingDefaults: false,
+
   jsiiTargetLanguages: [
     JsiiLanguage.PYTHON,
     JsiiLanguage.DOTNET,
@@ -30,48 +57,72 @@ const project = new CdklabsConstructLibrary({
   ],
   // jsii publishing
   publishToPypi: {
-    distName: "cdk-golden-signals-dashboard",
-    module: "cdk-golden-signals-dashboard",
+    distName: 'cdk-golden-signals-dashboard',
+    module: 'cdk-golden-signals-dashboard',
   },
   publishToNuget: {
-    packageId: "Cdklabs.GoldenSignalsDashboard",
-    dotNetNamespace: "Cdklabs.GoldenSignalsDashboard",
+    packageId: 'Cdklabs.GoldenSignalsDashboard',
+    dotNetNamespace: 'Cdklabs.GoldenSignalsDashboard',
   },
   publishToMaven: {
-    mavenGroupId: "io.github.cdklabs",
-    javaPackage: "io.github.cdklabs.goldensignalsdashboard",
-    mavenArtifactId: "goldensignalsdashboard",
-    mavenEndpoint: "https://s01.oss.sonatype.org",
+    mavenGroupId: 'io.github.cdklabs',
+    javaPackage: 'io.github.cdklabs.goldensignalsdashboard',
+    mavenArtifactId: 'goldensignalsdashboard',
+    mavenEndpoint: 'https://s01.oss.sonatype.org',
   },
-  // Default is to release only features and fixes. If we don't do this, we'll
-  // release every day because of devDependency updates.
-  releasableCommits: ReleasableCommits.featuresAndFixes(),
 
-  // deps: [],                /* Runtime dependencies of this module. */
-  // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
-  // devDeps: [],             /* Build dependencies for this module. */
-  // packageName: undefined,  /* The "name" in package.json. */
+  autoApproveOptions: {
+    allowedUsernames: ['cdklabs-automation', 'jekzvadaria'],
+    secret: 'GITHUB_TOKEN',
+  },
+  autoApproveUpgrades: true,
+
+  depsUpgradeOptions: {
+    workflowOptions: {
+      labels: ['auto-approve'],
+      projenCredentials: github.GithubCredentials.fromPersonalAccessToken({
+        secret: 'PROJEN_GITHUB_TOKEN',
+      }),
+    },
+  },
+
+  jestOptions: {
+    jestConfig: {
+      // Ensure we don't try to parallelize too much, this causes timeouts.
+      maxConcurrency: 2,
+      moduleNameMapper: {
+        '../package.json': '<rootDir>/package.json',
+      },
+    },
+  },
+
+  prettier: true,
+  prettierOptions: {
+    settings: {
+      singleQuote: true,
+    },
+  },
 });
-project.eslint?.addExtends("plugin:security/recommended");
+project.eslint?.addExtends('plugin:security/recommended');
 const common_exclude = [
-  "cdk.out",
-  "cdk.context.json",
-  "yarn-error.log",
-  "coverage",
-  "venv",
-  "node_modules",
-  ".DS_Store",
+  'cdk.out',
+  'cdk.context.json',
+  'yarn-error.log',
+  'coverage',
+  'venv',
+  'node_modules',
+  '.DS_Store',
 ];
 project.deps.addDependency(
-  "@aws-cdk/integ-tests-alpha@2.41.0-alpha.0",
+  '@aws-cdk/integ-tests-alpha@2.41.0-alpha.0',
   DependencyType.TEST,
 );
-new JsonFile(project, "test/integ/tsconfig.json", {
+new JsonFile(project, 'test/integ/tsconfig.json', {
   obj: {
-    extends: "../../tsconfig.dev.json",
-    include: ["./**/integ.*.ts"],
+    extends: '../../tsconfig.dev.json',
+    include: ['./**/integ.*.ts'],
   },
 });
 project.gitignore.exclude(...common_exclude);
-project.npmignore!.exclude(...common_exclude, "image");
+project.npmignore!.exclude(...common_exclude, 'image');
 project.synth();

@@ -1,13 +1,13 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { ResourceProps, Token, Duration, Stack } from "aws-cdk-lib";
-import * as cloudwatch from "aws-cdk-lib/aws-cloudwatch";
-import { IMetric, IAlarm } from "aws-cdk-lib/aws-cloudwatch";
-import { Construct } from "constructs";
-import { lambdaConstants, dashboardConstants } from "./constants";
-import { CdkGSDashboardResourceProps } from "./index";
-import * as utilities from "./utilities";
+import { ResourceProps, Token, Duration, Stack } from 'aws-cdk-lib';
+import * as cloudwatch from 'aws-cdk-lib/aws-cloudwatch';
+import { IMetric, IAlarm } from 'aws-cdk-lib/aws-cloudwatch';
+import { Construct } from 'constructs';
+import { lambdaConstants, dashboardConstants } from './constants';
+import { CdkGSDashboardResourceProps } from './index';
+import * as utilities from './utilities';
 
 export interface CdkLambdaDashboardProps extends ResourceProps {
   readonly dashboardName: string;
@@ -30,11 +30,11 @@ export class LambdaDashboard extends Construct {
   constructor(scope: Construct, id: string, props: CdkLambdaDashboardProps) {
     super(scope, id);
 
-    let lambdaDashboard = new cloudwatch.Dashboard(this, "MyDashboard", {
+    let lambdaDashboard = new cloudwatch.Dashboard(this, 'MyDashboard', {
       dashboardName: props.dashboardName,
-      end: "end",
+      end: 'end',
       periodOverride: cloudwatch.PeriodOverride.AUTO,
-      start: "start",
+      start: 'start',
       widgets: [],
     });
 
@@ -42,7 +42,7 @@ export class LambdaDashboard extends Construct {
       markdown:
         dashboardConstants.TITLE_MARKDOWN.replace(
           dashboardConstants.TITLE_REGEX,
-          "Lambda",
+          'Lambda',
         ) + lambdaConstants.LAMBDA_TITLE_MARKDOWN,
       height: 2,
       width: 24,
@@ -81,8 +81,8 @@ export class LambdaDashboard extends Construct {
     let cpuTotalTimeMetricList: IMetric[] = [];
     let totalNetworkMetricList: IMetric[] = [];
     let lambdaAlarms: IAlarm[] = [];
-    let insightDashboardMarkdown: string = "";
-    let functionLinksMarkdown: string = "";
+    let insightDashboardMarkdown: string = '';
+    let functionLinksMarkdown: string = '';
 
     for (let entry of props.functionNames) {
       let functions: string[] = entry.resources;
@@ -105,18 +105,18 @@ export class LambdaDashboard extends Construct {
           lambdaConstants.METRIC_DURATION_MINUTES,
         );
         let functionName: string =
-          entry.resourceRegion.replace(/[^a-zA-Z0-9]/g, "") +
-          func.replace(/[^a-zA-Z0-9]/g, "");
+          entry.resourceRegion.replace(/[^a-zA-Z0-9]/g, '') +
+          func.replace(/[^a-zA-Z0-9]/g, '');
 
         let durationMetric = new cloudwatch.Metric({
           namespace: lambdaConstants.NAMESPACE,
-          metricName: "Duration",
+          metricName: 'Duration',
           label: lambdaConstants.LABEL,
           period: metricPeriod,
           dimensionsMap: {
             FunctionName: func,
           },
-          statistic: "p95",
+          statistic: 'p95',
           color: colorHex,
           region: entry.resourceRegion,
         });
@@ -124,7 +124,7 @@ export class LambdaDashboard extends Construct {
 
         let invocationMetric = new cloudwatch.Metric({
           namespace: lambdaConstants.NAMESPACE,
-          metricName: "Invocations",
+          metricName: 'Invocations',
           label: lambdaConstants.LABEL,
           period: metricPeriod,
           dimensionsMap: {
@@ -138,7 +138,7 @@ export class LambdaDashboard extends Construct {
 
         let concurrentExecutionsMetric = new cloudwatch.Metric({
           namespace: lambdaConstants.NAMESPACE,
-          metricName: "ConcurrentExecutions",
+          metricName: 'ConcurrentExecutions',
           label: lambdaConstants.LABEL,
           period: metricPeriod,
           dimensionsMap: {
@@ -152,7 +152,7 @@ export class LambdaDashboard extends Construct {
 
         let throttlesMetric = new cloudwatch.Metric({
           namespace: lambdaConstants.NAMESPACE,
-          metricName: "Throttles",
+          metricName: 'Throttles',
           label: lambdaConstants.LABEL,
           period: metricPeriod,
           dimensionsMap: {
@@ -166,7 +166,7 @@ export class LambdaDashboard extends Construct {
 
         let errorsMetric = new cloudwatch.Metric({
           namespace: lambdaConstants.NAMESPACE,
-          metricName: "Errors",
+          metricName: 'Errors',
           label: lambdaConstants.LABEL,
           period: metricPeriod,
           dimensionsMap: {
@@ -176,9 +176,9 @@ export class LambdaDashboard extends Construct {
           region: entry.resourceRegion,
         });
 
-        let i1: string = functionName + "Invocations";
-        let e1: string = functionName + "Errors";
-        let errorRateExpression: string = "IF(i1 !=0, (e1 / i1) * 100, 0)";
+        let i1: string = functionName + 'Invocations';
+        let e1: string = functionName + 'Errors';
+        let errorRateExpression: string = 'IF(i1 !=0, (e1 / i1) * 100, 0)';
         errorRateExpression = errorRateExpression
           .replace(/\bi1\b/g, i1)
           .replace(/\be1\b/g, e1);
@@ -202,9 +202,9 @@ export class LambdaDashboard extends Construct {
           if (Stack.of(this).region === entry.resourceRegion) {
             let throttlesAlarm = new cloudwatch.Alarm(
               this,
-              "Throttles" + functionName,
+              'Throttles' + functionName,
               {
-                alarmName: "Throttles-" + functionName,
+                alarmName: 'Throttles-' + functionName,
                 comparisonOperator:
                   cloudwatch.ComparisonOperator.GREATER_THAN_THRESHOLD,
                 threshold: 0,
@@ -215,9 +215,9 @@ export class LambdaDashboard extends Construct {
 
             let errorRateAlarm = new cloudwatch.Alarm(
               this,
-              "ErrorRate" + functionName,
+              'ErrorRate' + functionName,
               {
-                alarmName: "ErrorRate-" + functionName,
+                alarmName: 'ErrorRate-' + functionName,
                 comparisonOperator:
                   cloudwatch.ComparisonOperator.GREATER_THAN_THRESHOLD,
                 threshold: 2,
@@ -234,7 +234,7 @@ export class LambdaDashboard extends Construct {
         if (props.showInsightsMetrics === true) {
           let memoryUtilizationMetric = new cloudwatch.Metric({
             namespace: lambdaConstants.LAMBDA_INSIGHTS_NAMESPACE,
-            metricName: "memory_utilization",
+            metricName: 'memory_utilization',
             label: lambdaConstants.LAMBDA_INSIGHTS_LABEL,
             period: metricPeriod,
             dimensionsMap: {
@@ -247,7 +247,7 @@ export class LambdaDashboard extends Construct {
 
           let cpuTotalTimeMetric = new cloudwatch.Metric({
             namespace: lambdaConstants.LAMBDA_INSIGHTS_NAMESPACE,
-            metricName: "cpu_total_time",
+            metricName: 'cpu_total_time',
             label: lambdaConstants.LAMBDA_INSIGHTS_LABEL,
             period: metricPeriod,
             dimensionsMap: {
@@ -260,7 +260,7 @@ export class LambdaDashboard extends Construct {
 
           let totalNetworkMetric = new cloudwatch.Metric({
             namespace: lambdaConstants.LAMBDA_INSIGHTS_NAMESPACE,
-            metricName: "total_network",
+            metricName: 'total_network',
             label: lambdaConstants.LAMBDA_INSIGHTS_LABEL,
             period: metricPeriod,
             dimensionsMap: {
@@ -275,43 +275,43 @@ export class LambdaDashboard extends Construct {
     }
 
     const durationWidget = new cloudwatch.GraphWidget({
-      title: "Duration: P95",
+      title: 'Duration: P95',
       left: durationMetricList,
       height: 6,
       width: 12,
-      leftYAxis: { label: "Milliseconds", showUnits: false },
+      leftYAxis: { label: 'Milliseconds', showUnits: false },
     });
 
     const invocationsWidget = new cloudwatch.GraphWidget({
-      title: "Invocations: Sum",
+      title: 'Invocations: Sum',
       left: invocationsMetricList,
       height: 6,
       width: 12,
-      leftYAxis: { label: "Count", showUnits: false },
+      leftYAxis: { label: 'Count', showUnits: false },
     });
 
     const concurrentExecutionsWidget = new cloudwatch.GraphWidget({
-      title: "ConcurrentExecutions: Sum",
+      title: 'ConcurrentExecutions: Sum',
       left: concurrentExecutionsMetricList,
       height: 6,
       width: 6,
-      leftYAxis: { label: "Count", showUnits: false },
+      leftYAxis: { label: 'Count', showUnits: false },
     });
 
     const throttlesWidget = new cloudwatch.GraphWidget({
-      title: "Throttles: Sum",
+      title: 'Throttles: Sum',
       left: throttlesMetricList,
       height: 6,
       width: 6,
-      leftYAxis: { label: "Count", showUnits: false },
+      leftYAxis: { label: 'Count', showUnits: false },
     });
 
     const errorsWidget = new cloudwatch.GraphWidget({
-      title: "ErrorRate: Percent",
+      title: 'ErrorRate: Percent',
       left: errorsMetricList,
       height: 6,
       width: 12,
-      leftYAxis: { label: "Percent", showUnits: false },
+      leftYAxis: { label: 'Percent', showUnits: false },
     });
 
     const insightWidget = new cloudwatch.TextWidget({
@@ -328,31 +328,31 @@ export class LambdaDashboard extends Construct {
     });
 
     const memoryWidget = new cloudwatch.GraphWidget({
-      title: "Memory Usage: Percent",
+      title: 'Memory Usage: Percent',
       left: memoryUtilizationMetricList,
       height: 6,
       width: 8,
-      leftYAxis: { label: "Percent", showUnits: false },
+      leftYAxis: { label: 'Percent', showUnits: false },
     });
 
     const cpuWidget = new cloudwatch.GraphWidget({
-      title: "CPU Usage: Average",
+      title: 'CPU Usage: Average',
       left: cpuTotalTimeMetricList,
       height: 6,
       width: 8,
-      leftYAxis: { label: "Milliseconds", showUnits: false },
+      leftYAxis: { label: 'Milliseconds', showUnits: false },
     });
 
     const networkWidget = new cloudwatch.GraphWidget({
-      title: "Network Usage: Average",
+      title: 'Network Usage: Average',
       left: totalNetworkMetricList,
       height: 6,
       width: 8,
-      leftYAxis: { label: "Bytes", showUnits: false },
+      leftYAxis: { label: 'Bytes', showUnits: false },
     });
 
     const alarmWidget = new cloudwatch.AlarmStatusWidget({
-      title: "Alarms",
+      title: 'Alarms',
       height: utilities.getAlarmWidgetHeight(lambdaAlarms),
       width: 24,
       alarms: lambdaAlarms,

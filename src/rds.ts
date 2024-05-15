@@ -1,13 +1,13 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { ResourceProps, Token, Duration } from "aws-cdk-lib";
-import * as cloudwatch from "aws-cdk-lib/aws-cloudwatch";
-import { IMetric } from "aws-cdk-lib/aws-cloudwatch";
-import { Construct } from "constructs";
-import { rdsConstants, dashboardConstants } from "./constants";
-import { CdkGSDashboardResourceProps } from "./index";
-import * as utilities from "./utilities";
+import { ResourceProps, Token, Duration } from 'aws-cdk-lib';
+import * as cloudwatch from 'aws-cdk-lib/aws-cloudwatch';
+import { IMetric } from 'aws-cdk-lib/aws-cloudwatch';
+import { Construct } from 'constructs';
+import { rdsConstants, dashboardConstants } from './constants';
+import { CdkGSDashboardResourceProps } from './index';
+import * as utilities from './utilities';
 
 export interface CdkRDSDashboardProps extends ResourceProps {
   readonly dashboardName: string;
@@ -25,11 +25,11 @@ export class RDSDashboard extends Construct {
   constructor(scope: Construct, id: string, props: CdkRDSDashboardProps) {
     super(scope, id);
 
-    const rdsDashboard = new cloudwatch.Dashboard(this, "MyDashboard", {
+    const rdsDashboard = new cloudwatch.Dashboard(this, 'MyDashboard', {
       dashboardName: props.dashboardName,
-      end: "end",
+      end: 'end',
       periodOverride: cloudwatch.PeriodOverride.AUTO,
-      start: "start",
+      start: 'start',
       widgets: [],
     });
 
@@ -37,7 +37,7 @@ export class RDSDashboard extends Construct {
       markdown:
         dashboardConstants.TITLE_MARKDOWN.replace(
           dashboardConstants.TITLE_REGEX,
-          "RDS",
+          'RDS',
         ) + rdsConstants.RDS_TITLE_MARKDOWN,
       height: 2,
       width: 24,
@@ -81,7 +81,7 @@ export class RDSDashboard extends Construct {
     let writeIOPSMetricList: IMetric[] = [];
     let failedSQLServerAgentJobsCountMetricList: IMetric[] = [];
     let replicaLagMetricList: IMetric[] = [];
-    let dbinstanceLinksMarkdown: string = "";
+    let dbinstanceLinksMarkdown: string = '';
 
     for (let entry of props.dbInstanceIdentifiers) {
       let dbInstances: string[] = entry.resources;
@@ -102,7 +102,7 @@ export class RDSDashboard extends Construct {
         cpuUtilizationMetricList.push(
           new cloudwatch.Metric({
             namespace: rdsConstants.NAMESPACE,
-            metricName: "CPUUtilization",
+            metricName: 'CPUUtilization',
             label: rdsConstants.LABEL,
             period: metricPeriod,
             dimensionsMap: {
@@ -116,7 +116,7 @@ export class RDSDashboard extends Construct {
         freeStorageSpaceMetricList.push(
           new cloudwatch.Metric({
             namespace: rdsConstants.NAMESPACE,
-            metricName: "FreeStorageSpace",
+            metricName: 'FreeStorageSpace',
             label: rdsConstants.LABEL,
             period: metricPeriod,
             dimensionsMap: {
@@ -130,7 +130,7 @@ export class RDSDashboard extends Construct {
         databaseConnectionsMetricList.push(
           new cloudwatch.Metric({
             namespace: rdsConstants.NAMESPACE,
-            metricName: "DatabaseConnections",
+            metricName: 'DatabaseConnections',
             label: rdsConstants.LABEL,
             period: metricPeriod,
             dimensionsMap: {
@@ -144,7 +144,7 @@ export class RDSDashboard extends Construct {
         swapUsageMetricList.push(
           new cloudwatch.Metric({
             namespace: rdsConstants.NAMESPACE,
-            metricName: "SwapUsage",
+            metricName: 'SwapUsage',
             label: rdsConstants.LABEL,
             period: metricPeriod,
             dimensionsMap: {
@@ -158,7 +158,7 @@ export class RDSDashboard extends Construct {
         freeableMemoryMetricList.push(
           new cloudwatch.Metric({
             namespace: rdsConstants.NAMESPACE,
-            metricName: "FreeableMemory",
+            metricName: 'FreeableMemory',
             label: rdsConstants.LABEL,
             period: metricPeriod,
             dimensionsMap: {
@@ -172,7 +172,7 @@ export class RDSDashboard extends Construct {
         readLatencyMetricList.push(
           new cloudwatch.Metric({
             namespace: rdsConstants.NAMESPACE,
-            metricName: "ReadLatency",
+            metricName: 'ReadLatency',
             label: rdsConstants.LABEL,
             period: metricPeriod,
             dimensionsMap: {
@@ -186,7 +186,7 @@ export class RDSDashboard extends Construct {
         writeLatencyMetricList.push(
           new cloudwatch.Metric({
             namespace: rdsConstants.NAMESPACE,
-            metricName: "WriteLatency",
+            metricName: 'WriteLatency',
             label: rdsConstants.LABEL,
             period: metricPeriod,
             dimensionsMap: {
@@ -200,7 +200,7 @@ export class RDSDashboard extends Construct {
         diskQueueDepthMetricList.push(
           new cloudwatch.Metric({
             namespace: rdsConstants.NAMESPACE,
-            metricName: "DiskQueueDepth",
+            metricName: 'DiskQueueDepth',
             label: rdsConstants.LABEL,
             period: metricPeriod,
             dimensionsMap: {
@@ -214,7 +214,7 @@ export class RDSDashboard extends Construct {
         readThroughputMetricList.push(
           new cloudwatch.Metric({
             namespace: rdsConstants.NAMESPACE,
-            metricName: "ReadThroughput",
+            metricName: 'ReadThroughput',
             label: rdsConstants.LABEL,
             period: metricPeriod,
             dimensionsMap: {
@@ -228,7 +228,7 @@ export class RDSDashboard extends Construct {
         writeThroughputMetricList.push(
           new cloudwatch.Metric({
             namespace: rdsConstants.NAMESPACE,
-            metricName: "WriteThroughput",
+            metricName: 'WriteThroughput',
             label: rdsConstants.LABEL,
             period: metricPeriod,
             dimensionsMap: {
@@ -242,7 +242,7 @@ export class RDSDashboard extends Construct {
         readIOPSMetricList.push(
           new cloudwatch.Metric({
             namespace: rdsConstants.NAMESPACE,
-            metricName: "ReadIOPS",
+            metricName: 'ReadIOPS',
             label: rdsConstants.LABEL,
             period: metricPeriod,
             dimensionsMap: {
@@ -256,7 +256,7 @@ export class RDSDashboard extends Construct {
         writeIOPSMetricList.push(
           new cloudwatch.Metric({
             namespace: rdsConstants.NAMESPACE,
-            metricName: "WriteIOPS",
+            metricName: 'WriteIOPS',
             label: rdsConstants.LABEL,
             period: metricPeriod,
             dimensionsMap: {
@@ -270,7 +270,7 @@ export class RDSDashboard extends Construct {
         failedSQLServerAgentJobsCountMetricList.push(
           new cloudwatch.Metric({
             namespace: rdsConstants.NAMESPACE,
-            metricName: "FailedSQLServerAgentJobsCount",
+            metricName: 'FailedSQLServerAgentJobsCount',
             label: rdsConstants.LABEL,
             period: metricPeriod,
             dimensionsMap: {
@@ -284,7 +284,7 @@ export class RDSDashboard extends Construct {
         replicaLagMetricList.push(
           new cloudwatch.Metric({
             namespace: rdsConstants.NAMESPACE,
-            metricName: "ReplicaLag",
+            metricName: 'ReplicaLag',
             label: rdsConstants.LABEL,
             period: metricPeriod,
             dimensionsMap: {
@@ -299,102 +299,102 @@ export class RDSDashboard extends Construct {
     }
 
     const cpuUtilizationWidget = new cloudwatch.GraphWidget({
-      title: "CPUUtilization: Average",
+      title: 'CPUUtilization: Average',
       left: cpuUtilizationMetricList,
       height: 6,
       width: 6,
-      leftYAxis: { label: "Percent", showUnits: false },
+      leftYAxis: { label: 'Percent', showUnits: false },
     });
     const freeStorageSpaceWidget = new cloudwatch.GraphWidget({
-      title: "FreeStorageSpace: Average",
+      title: 'FreeStorageSpace: Average',
       left: freeStorageSpaceMetricList,
       height: 6,
       width: 4,
-      leftYAxis: { label: "Bytes", showUnits: false },
+      leftYAxis: { label: 'Bytes', showUnits: false },
     });
     const databaseConnectionsWidget = new cloudwatch.GraphWidget({
-      title: "DatabaseConnections: Sum",
+      title: 'DatabaseConnections: Sum',
       left: databaseConnectionsMetricList,
       height: 6,
       width: 4,
-      leftYAxis: { label: "Count", showUnits: false },
+      leftYAxis: { label: 'Count', showUnits: false },
     });
     const swapUsageWidget = new cloudwatch.GraphWidget({
-      title: "SwapUsage: Average",
+      title: 'SwapUsage: Average',
       left: swapUsageMetricList,
       height: 6,
       width: 4,
-      leftYAxis: { label: "Bytes", showUnits: false },
+      leftYAxis: { label: 'Bytes', showUnits: false },
     });
     const freeableMemoryWidget = new cloudwatch.GraphWidget({
-      title: "FreeableMemory: Average",
+      title: 'FreeableMemory: Average',
       left: freeableMemoryMetricList,
       height: 6,
       width: 6,
-      leftYAxis: { label: "Bytes", showUnits: false },
+      leftYAxis: { label: 'Bytes', showUnits: false },
     });
     const readLatencyWidget = new cloudwatch.GraphWidget({
-      title: "ReadLatency: Average",
+      title: 'ReadLatency: Average',
       left: readLatencyMetricList,
       height: 6,
       width: 6,
-      leftYAxis: { label: "Seconds", showUnits: false },
+      leftYAxis: { label: 'Seconds', showUnits: false },
     });
     const writeLatencyWidget = new cloudwatch.GraphWidget({
-      title: "WriteLatency: Average",
+      title: 'WriteLatency: Average',
       left: writeLatencyMetricList,
       height: 6,
       width: 6,
-      leftYAxis: { label: "Seconds", showUnits: false },
+      leftYAxis: { label: 'Seconds', showUnits: false },
     });
     const diskQueueDepthWidget = new cloudwatch.GraphWidget({
-      title: "DiskQueueDepth: Average",
+      title: 'DiskQueueDepth: Average',
       left: diskQueueDepthMetricList,
       height: 6,
       width: 6,
-      leftYAxis: { label: "Count", showUnits: false },
+      leftYAxis: { label: 'Count', showUnits: false },
     });
     const readThroughputWidget = new cloudwatch.GraphWidget({
-      title: "ReadThroughput: Average",
+      title: 'ReadThroughput: Average',
       left: readThroughputMetricList,
       height: 6,
       width: 6,
-      leftYAxis: { label: "Bytes/Second", showUnits: false },
+      leftYAxis: { label: 'Bytes/Second', showUnits: false },
     });
     const writeThroughputWidget = new cloudwatch.GraphWidget({
-      title: "WriteThroughput: Average",
+      title: 'WriteThroughput: Average',
       left: writeThroughputMetricList,
       height: 6,
       width: 6,
-      leftYAxis: { label: "Bytes/Second", showUnits: false },
+      leftYAxis: { label: 'Bytes/Second', showUnits: false },
     });
     const readIOPSWidget = new cloudwatch.GraphWidget({
-      title: "ReadIOPS: Average",
+      title: 'ReadIOPS: Average',
       left: readIOPSMetricList,
       height: 6,
       width: 6,
-      leftYAxis: { label: "Count/Second", showUnits: false },
+      leftYAxis: { label: 'Count/Second', showUnits: false },
     });
     const writeIOPSWidget = new cloudwatch.GraphWidget({
-      title: "WriteIOPS: Average",
+      title: 'WriteIOPS: Average',
       left: writeIOPSMetricList,
       height: 6,
       width: 6,
-      leftYAxis: { label: "Count/Second", showUnits: false },
+      leftYAxis: { label: 'Count/Second', showUnits: false },
     });
     const failedSQLServerAgentJobsCountWidget = new cloudwatch.GraphWidget({
-      title: "FailedSQLServerAgentJobsCount: Sum",
+      title: 'FailedSQLServerAgentJobsCount: Sum',
       left: failedSQLServerAgentJobsCountMetricList,
       height: 12,
       width: 12,
-      leftYAxis: { label: "Count", showUnits: false },
+      leftYAxis: { label: 'Count', showUnits: false },
     });
     const replicaLagWidget = new cloudwatch.GraphWidget({
-      title: "ReplicaLag: Average",
+      title: 'ReplicaLag: Average',
       left: replicaLagMetricList,
       height: 6,
       width: 6,
-      leftYAxis: { label: "Seconds", showUnits: false },
+      leftYAxis: { label: 'Seconds', showUnits: false },
     });
     const spacer = new cloudwatch.Spacer({
       height: 6,

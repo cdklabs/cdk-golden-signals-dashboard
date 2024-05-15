@@ -1,13 +1,13 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { ResourceProps, Token, Duration } from "aws-cdk-lib";
-import * as cloudwatch from "aws-cdk-lib/aws-cloudwatch";
-import { IMetric } from "aws-cdk-lib/aws-cloudwatch";
-import { Construct } from "constructs";
-import { snsConstants, dashboardConstants } from "./constants";
-import { CdkGSDashboardResourceProps } from "./index";
-import * as utilities from "./utilities";
+import { ResourceProps, Token, Duration } from 'aws-cdk-lib';
+import * as cloudwatch from 'aws-cdk-lib/aws-cloudwatch';
+import { IMetric } from 'aws-cdk-lib/aws-cloudwatch';
+import { Construct } from 'constructs';
+import { snsConstants, dashboardConstants } from './constants';
+import { CdkGSDashboardResourceProps } from './index';
+import * as utilities from './utilities';
 
 export interface CdkSNSDashboardProps extends ResourceProps {
   readonly dashboardName: string;
@@ -25,11 +25,11 @@ export class SNSDashboard extends Construct {
   constructor(scope: Construct, id: string, props: CdkSNSDashboardProps) {
     super(scope, id);
 
-    const snsDashboard = new cloudwatch.Dashboard(this, "MyDashboard", {
+    const snsDashboard = new cloudwatch.Dashboard(this, 'MyDashboard', {
       dashboardName: props.dashboardName,
-      end: "end",
+      end: 'end',
       periodOverride: cloudwatch.PeriodOverride.AUTO,
-      start: "start",
+      start: 'start',
       widgets: [],
     });
 
@@ -37,7 +37,7 @@ export class SNSDashboard extends Construct {
       markdown:
         dashboardConstants.TITLE_MARKDOWN.replace(
           dashboardConstants.TITLE_REGEX,
-          "SNS",
+          'SNS',
         ) + snsConstants.SNS_TITLE_MARKDOWN,
       height: 2,
       width: 24,
@@ -86,7 +86,7 @@ export class SNSDashboard extends Construct {
         numberOfNotificationsDeliveredMetricList.push(
           new cloudwatch.Metric({
             namespace: snsConstants.NAMESPACE,
-            metricName: "NumberOfNotificationsDelivered",
+            metricName: 'NumberOfNotificationsDelivered',
             label: snsConstants.LABEL,
             period: metricPeriod,
             dimensionsMap: {
@@ -100,7 +100,7 @@ export class SNSDashboard extends Construct {
         numberOfMessagesPublishedMetricList.push(
           new cloudwatch.Metric({
             namespace: snsConstants.NAMESPACE,
-            metricName: "NumberOfMessagesPublished",
+            metricName: 'NumberOfMessagesPublished',
             label: snsConstants.LABEL,
             period: metricPeriod,
             dimensionsMap: {
@@ -114,7 +114,7 @@ export class SNSDashboard extends Construct {
         publishSizeMetricList.push(
           new cloudwatch.Metric({
             namespace: snsConstants.NAMESPACE,
-            metricName: "PublishSize",
+            metricName: 'PublishSize',
             label: snsConstants.LABEL,
             period: metricPeriod,
             dimensionsMap: {
@@ -128,7 +128,7 @@ export class SNSDashboard extends Construct {
         smsSuccessRateMetricList.push(
           new cloudwatch.Metric({
             namespace: snsConstants.NAMESPACE,
-            metricName: "SMSSuccessRate",
+            metricName: 'SMSSuccessRate',
             label: snsConstants.LABEL,
             period: metricPeriod,
             dimensionsMap: {
@@ -142,7 +142,7 @@ export class SNSDashboard extends Construct {
         numberOfNotificationsFailedMetricList.push(
           new cloudwatch.Metric({
             namespace: snsConstants.NAMESPACE,
-            metricName: "NumberOfNotificationsFailed",
+            metricName: 'NumberOfNotificationsFailed',
             label: snsConstants.LABEL,
             period: metricPeriod,
             dimensionsMap: {
@@ -157,43 +157,43 @@ export class SNSDashboard extends Construct {
     }
 
     const numberOfNotificationsDeliveredWidget = new cloudwatch.GraphWidget({
-      title: "NumberOfNotificationsDelivered: Sum",
+      title: 'NumberOfNotificationsDelivered: Sum',
       left: numberOfNotificationsDeliveredMetricList,
       height: 6,
       width: 4,
-      leftYAxis: { label: "Count", showUnits: false },
+      leftYAxis: { label: 'Count', showUnits: false },
     });
 
     const numberOfMessagesPublishedWidget = new cloudwatch.GraphWidget({
-      title: "NumberOfMessagesPublished: Sum",
+      title: 'NumberOfMessagesPublished: Sum',
       left: numberOfMessagesPublishedMetricList,
       height: 6,
       width: 4,
-      leftYAxis: { label: "Count", showUnits: false },
+      leftYAxis: { label: 'Count', showUnits: false },
     });
 
     const publishSizeWidget = new cloudwatch.GraphWidget({
-      title: "PublishSize: Average",
+      title: 'PublishSize: Average',
       left: publishSizeMetricList,
       height: 6,
       width: 4,
-      leftYAxis: { label: "Bytes", showUnits: false },
+      leftYAxis: { label: 'Bytes', showUnits: false },
     });
 
     const smsSuccessRateWidget = new cloudwatch.GraphWidget({
-      title: "SMSSuccessRate: Sum",
+      title: 'SMSSuccessRate: Sum',
       left: smsSuccessRateMetricList,
       height: 6,
       width: 6,
-      leftYAxis: { label: "Count", showUnits: false },
+      leftYAxis: { label: 'Count', showUnits: false },
     });
 
     const numberOfNotificationsFailedWidget = new cloudwatch.GraphWidget({
-      title: "NumberOfNotificationsFailed: Sum",
+      title: 'NumberOfNotificationsFailed: Sum',
       left: numberOfNotificationsFailedMetricList,
       height: 6,
       width: 6,
-      leftYAxis: { label: "Count", showUnits: false },
+      leftYAxis: { label: 'Count', showUnits: false },
     });
 
     const spacer = new cloudwatch.Spacer({
