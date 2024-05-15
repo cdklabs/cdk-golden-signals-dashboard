@@ -1,13 +1,13 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { ResourceProps, Token, Duration, Stack } from "aws-cdk-lib";
-import * as cloudwatch from "aws-cdk-lib/aws-cloudwatch";
-import { IMetric, IAlarm } from "aws-cdk-lib/aws-cloudwatch";
-import { Construct } from "constructs";
-import { dynamodbConstants, dashboardConstants } from "./constants";
-import { CdkGSDashboardResourceProps } from "./index";
-import * as utilities from "./utilities";
+import { ResourceProps, Token, Duration, Stack } from 'aws-cdk-lib';
+import * as cloudwatch from 'aws-cdk-lib/aws-cloudwatch';
+import { IMetric, IAlarm } from 'aws-cdk-lib/aws-cloudwatch';
+import { Construct } from 'constructs';
+import { dynamodbConstants, dashboardConstants } from './constants';
+import { CdkGSDashboardResourceProps } from './index';
+import * as utilities from './utilities';
 
 export interface CdkDynamodbDashboardProps extends ResourceProps {
   readonly dashboardName: string;
@@ -25,18 +25,18 @@ export class DynamodbDashboard extends Construct {
   constructor(scope: Construct, id: string, props: CdkDynamodbDashboardProps) {
     super(scope, id);
 
-    const dynamodbDashboard = new cloudwatch.Dashboard(this, "MyDashboard", {
+    const dynamodbDashboard = new cloudwatch.Dashboard(this, 'MyDashboard', {
       dashboardName: props.dashboardName,
-      end: "end",
+      end: 'end',
       periodOverride: cloudwatch.PeriodOverride.AUTO,
-      start: "start",
+      start: 'start',
       widgets: [],
     });
     const titleWidget = new cloudwatch.TextWidget({
       markdown:
         dashboardConstants.TITLE_MARKDOWN.replace(
           dashboardConstants.TITLE_REGEX,
-          "DynamoDB",
+          'DynamoDB',
         ) + dynamodbConstants.DYNAMODB_TITLE_MARKDOWN,
       height: 2,
       width: 24,
@@ -79,7 +79,7 @@ export class DynamodbDashboard extends Construct {
     let returnedBytesMetricList: IMetric[] = [];
     let returnedRecordsCountMetricList: IMetric[] = [];
     let dynamodbAlarms: IAlarm[] = [];
-    let tableLinksMarkdown: string = "";
+    let tableLinksMarkdown: string = '';
 
     for (let entry of props.tableNames) {
       let tables: string[] = entry.resources;
@@ -98,17 +98,17 @@ export class DynamodbDashboard extends Construct {
           dynamodbConstants.METRIC_DURATION_MINUTES,
         );
         let tableId: string =
-          entry.resourceRegion.replace(/[^a-zA-Z0-9]/g, "") +
-          table.replace(/[^a-zA-Z0-9]/g, "");
+          entry.resourceRegion.replace(/[^a-zA-Z0-9]/g, '') +
+          table.replace(/[^a-zA-Z0-9]/g, '');
 
         let systemErrorsMetricGetItem = new cloudwatch.Metric({
           namespace: dynamodbConstants.NAMESPACE,
-          metricName: "SystemErrors",
+          metricName: 'SystemErrors',
           label: dynamodbConstants.LABEL,
           period: metricPeriod,
           dimensionsMap: {
             TableName: table,
-            Operation: "GetItem",
+            Operation: 'GetItem',
           },
           statistic: cloudwatch.Statistic.SUM,
           color: leftColorHex,
@@ -116,12 +116,12 @@ export class DynamodbDashboard extends Construct {
         });
         let systemErrorsMetricScan = new cloudwatch.Metric({
           namespace: dynamodbConstants.NAMESPACE,
-          metricName: "SystemErrors",
+          metricName: 'SystemErrors',
           label: dynamodbConstants.LABEL,
           period: metricPeriod,
           dimensionsMap: {
             TableName: table,
-            Operation: "Scan",
+            Operation: 'Scan',
           },
           statistic: cloudwatch.Statistic.SUM,
           color: leftColorHex,
@@ -129,12 +129,12 @@ export class DynamodbDashboard extends Construct {
         });
         let systemErrorsMetricQuery = new cloudwatch.Metric({
           namespace: dynamodbConstants.NAMESPACE,
-          metricName: "SystemErrors",
+          metricName: 'SystemErrors',
           label: dynamodbConstants.LABEL,
           period: metricPeriod,
           dimensionsMap: {
             TableName: table,
-            Operation: "Query",
+            Operation: 'Query',
           },
           statistic: cloudwatch.Statistic.SUM,
           color: leftColorHex,
@@ -142,12 +142,12 @@ export class DynamodbDashboard extends Construct {
         });
         let systemErrorsMetricBatchGetItem = new cloudwatch.Metric({
           namespace: dynamodbConstants.NAMESPACE,
-          metricName: "SystemErrors",
+          metricName: 'SystemErrors',
           label: dynamodbConstants.LABEL,
           period: metricPeriod,
           dimensionsMap: {
             TableName: table,
-            Operation: "BatchGetItem",
+            Operation: 'BatchGetItem',
           },
           statistic: cloudwatch.Statistic.SUM,
           color: leftColorHex,
@@ -155,28 +155,28 @@ export class DynamodbDashboard extends Construct {
         });
         let systemErrorsMetricTransactGetItems = new cloudwatch.Metric({
           namespace: dynamodbConstants.NAMESPACE,
-          metricName: "SystemErrors",
+          metricName: 'SystemErrors',
           label: dynamodbConstants.LABEL,
           period: metricPeriod,
           dimensionsMap: {
             TableName: table,
-            Operation: "TransactGetItems",
+            Operation: 'TransactGetItems',
           },
           statistic: cloudwatch.Statistic.SUM,
           color: leftColorHex,
           region: entry.resourceRegion,
         });
-        let s6: string = tableId + "ReadGetItem";
-        let s7: string = tableId + "ReadScan";
-        let s8: string = tableId + "ReadQuery";
-        let s9: string = tableId + "ReadBatchGetItem";
-        let s10: string = tableId + "ReadTransactGetItems";
+        let s6: string = tableId + 'ReadGetItem';
+        let s7: string = tableId + 'ReadScan';
+        let s8: string = tableId + 'ReadQuery';
+        let s9: string = tableId + 'ReadBatchGetItem';
+        let s10: string = tableId + 'ReadTransactGetItems';
         let systemErrorsMetricReadExpression: string =
           'SUM(METRICS("TABLEID"))';
         systemErrorsMetricReadExpression =
           systemErrorsMetricReadExpression.replace(
             /\bTABLEID\b/g,
-            tableId + "Read",
+            tableId + 'Read',
           );
         let systemErrorsMetricRead = new cloudwatch.MathExpression({
           label: table,
@@ -195,12 +195,12 @@ export class DynamodbDashboard extends Construct {
 
         let systemErrorsMetricPutItem = new cloudwatch.Metric({
           namespace: dynamodbConstants.NAMESPACE,
-          metricName: "SystemErrors",
+          metricName: 'SystemErrors',
           label: dynamodbConstants.LABEL,
           period: metricPeriod,
           dimensionsMap: {
             TableName: table,
-            Operation: "PutItem",
+            Operation: 'PutItem',
           },
           statistic: cloudwatch.Statistic.SUM,
           color: rightColorHex,
@@ -208,12 +208,12 @@ export class DynamodbDashboard extends Construct {
         });
         let systemErrorsMetricUpdateItem = new cloudwatch.Metric({
           namespace: dynamodbConstants.NAMESPACE,
-          metricName: "SystemErrors",
+          metricName: 'SystemErrors',
           label: dynamodbConstants.LABEL,
           period: metricPeriod,
           dimensionsMap: {
             TableName: table,
-            Operation: "UpdateItem",
+            Operation: 'UpdateItem',
           },
           statistic: cloudwatch.Statistic.SUM,
           color: rightColorHex,
@@ -221,12 +221,12 @@ export class DynamodbDashboard extends Construct {
         });
         let systemErrorsMetricDeleteItem = new cloudwatch.Metric({
           namespace: dynamodbConstants.NAMESPACE,
-          metricName: "SystemErrors",
+          metricName: 'SystemErrors',
           label: dynamodbConstants.LABEL,
           period: metricPeriod,
           dimensionsMap: {
             TableName: table,
-            Operation: "DeleteItem",
+            Operation: 'DeleteItem',
           },
           statistic: cloudwatch.Statistic.SUM,
           color: rightColorHex,
@@ -234,12 +234,12 @@ export class DynamodbDashboard extends Construct {
         });
         let systemErrorsMetricBatchWriteItem = new cloudwatch.Metric({
           namespace: dynamodbConstants.NAMESPACE,
-          metricName: "SystemErrors",
+          metricName: 'SystemErrors',
           label: dynamodbConstants.LABEL,
           period: metricPeriod,
           dimensionsMap: {
             TableName: table,
-            Operation: "BatchWriteItem",
+            Operation: 'BatchWriteItem',
           },
           statistic: cloudwatch.Statistic.SUM,
           color: rightColorHex,
@@ -247,28 +247,28 @@ export class DynamodbDashboard extends Construct {
         });
         let systemErrorsMetricTransactWriteItems = new cloudwatch.Metric({
           namespace: dynamodbConstants.NAMESPACE,
-          metricName: "SystemErrors",
+          metricName: 'SystemErrors',
           label: dynamodbConstants.LABEL,
           period: metricPeriod,
           dimensionsMap: {
             TableName: table,
-            Operation: "TransactWriteItems",
+            Operation: 'TransactWriteItems',
           },
           statistic: cloudwatch.Statistic.SUM,
           color: rightColorHex,
           region: entry.resourceRegion,
         });
-        let s1: string = tableId + "WritePutItem";
-        let s2: string = tableId + "WriteUpdateItem";
-        let s3: string = tableId + "WriteDeleteItem";
-        let s4: string = tableId + "WriteBatchWriteItem";
-        let s5: string = tableId + "WriteTransactWriteItems";
+        let s1: string = tableId + 'WritePutItem';
+        let s2: string = tableId + 'WriteUpdateItem';
+        let s3: string = tableId + 'WriteDeleteItem';
+        let s4: string = tableId + 'WriteBatchWriteItem';
+        let s5: string = tableId + 'WriteTransactWriteItems';
         let systemErrorsMetricWriteExpression: string =
           'SUM(METRICS("TABLEID"))';
         systemErrorsMetricWriteExpression =
           systemErrorsMetricWriteExpression.replace(
             /\bTABLEID\b/g,
-            tableId + "Write",
+            tableId + 'Write',
           );
         let systemErrorsMetricWrite = new cloudwatch.MathExpression({
           label: table,
@@ -287,7 +287,7 @@ export class DynamodbDashboard extends Construct {
 
         let userErrorsMetric = new cloudwatch.Metric({
           namespace: dynamodbConstants.NAMESPACE,
-          metricName: "UserErrors",
+          metricName: 'UserErrors',
           label: dynamodbConstants.LABEL,
           period: metricPeriod,
           dimensionsMap: {
@@ -301,7 +301,7 @@ export class DynamodbDashboard extends Construct {
 
         let conditionalCheckFailedRequestsMetric = new cloudwatch.Metric({
           namespace: dynamodbConstants.NAMESPACE,
-          metricName: "ConditionalCheckFailedRequests",
+          metricName: 'ConditionalCheckFailedRequests',
           label: dynamodbConstants.LABEL,
           period: metricPeriod,
           dimensionsMap: {
@@ -317,12 +317,12 @@ export class DynamodbDashboard extends Construct {
 
         let successfulRequestLatencyMetricGetItem = new cloudwatch.Metric({
           namespace: dynamodbConstants.NAMESPACE,
-          metricName: "SuccessfulRequestLatency",
+          metricName: 'SuccessfulRequestLatency',
           label: dynamodbConstants.LABEL,
           period: metricPeriod,
           dimensionsMap: {
             TableName: table,
-            Operation: "GetItem",
+            Operation: 'GetItem',
           },
           statistic: cloudwatch.Statistic.AVERAGE,
           color: leftColorHex,
@@ -330,25 +330,25 @@ export class DynamodbDashboard extends Construct {
         });
         let successfulRequestLatencyMetricBatchGetItem = new cloudwatch.Metric({
           namespace: dynamodbConstants.NAMESPACE,
-          metricName: "SuccessfulRequestLatency",
+          metricName: 'SuccessfulRequestLatency',
           label: dynamodbConstants.LABEL,
           period: metricPeriod,
           dimensionsMap: {
             TableName: table,
-            Operation: "BatchGetItem",
+            Operation: 'BatchGetItem',
           },
           statistic: cloudwatch.Statistic.AVERAGE,
           color: leftColorHex,
           region: entry.resourceRegion,
         });
-        let r1: string = tableId + "ReadGetItem";
-        let r2: string = tableId + "ReadBatchGetItem";
+        let r1: string = tableId + 'ReadGetItem';
+        let r2: string = tableId + 'ReadBatchGetItem';
         let successfulRequestLatencyMetricReadExpression: string =
           'AVG(METRICS("TABLEID"))';
         successfulRequestLatencyMetricReadExpression =
           successfulRequestLatencyMetricReadExpression.replace(
             /\bTABLEID\b/g,
-            tableId + "Read",
+            tableId + 'Read',
           );
         let successfulRequestLatencyMetricRead = new cloudwatch.MathExpression({
           label: table,
@@ -366,12 +366,12 @@ export class DynamodbDashboard extends Construct {
 
         let successfulRequestLatencyMetricPutItem = new cloudwatch.Metric({
           namespace: dynamodbConstants.NAMESPACE,
-          metricName: "SuccessfulRequestLatency",
+          metricName: 'SuccessfulRequestLatency',
           label: dynamodbConstants.LABEL,
           period: metricPeriod,
           dimensionsMap: {
             TableName: table,
-            Operation: "PutItem",
+            Operation: 'PutItem',
           },
           statistic: cloudwatch.Statistic.AVERAGE,
           color: rightColorHex,
@@ -380,25 +380,25 @@ export class DynamodbDashboard extends Construct {
         let successfulRequestLatencyMetricBatchWriteItem =
           new cloudwatch.Metric({
             namespace: dynamodbConstants.NAMESPACE,
-            metricName: "SuccessfulRequestLatency",
+            metricName: 'SuccessfulRequestLatency',
             label: dynamodbConstants.LABEL,
             period: metricPeriod,
             dimensionsMap: {
               TableName: table,
-              Operation: "BatchWriteItem",
+              Operation: 'BatchWriteItem',
             },
             statistic: cloudwatch.Statistic.AVERAGE,
             color: rightColorHex,
             region: entry.resourceRegion,
           });
-        let r3: string = tableId + "WritePutItem";
-        let r4: string = tableId + "WriteBatchWriteItem";
+        let r3: string = tableId + 'WritePutItem';
+        let r4: string = tableId + 'WriteBatchWriteItem';
         let successfulRequestLatencyMetricWriteExpression: string =
           'AVG(METRICS("TABLEID"))';
         successfulRequestLatencyMetricWriteExpression =
           successfulRequestLatencyMetricWriteExpression.replace(
             /\bTABLEID\b/g,
-            tableId + "Write",
+            tableId + 'Write',
           );
         let successfulRequestLatencyMetricWrite = new cloudwatch.MathExpression(
           {
@@ -418,14 +418,14 @@ export class DynamodbDashboard extends Construct {
 
         let successfulRequestLatencyMetricQuery = new cloudwatch.Metric({
           namespace: dynamodbConstants.NAMESPACE,
-          metricName: "SuccessfulRequestLatency",
+          metricName: 'SuccessfulRequestLatency',
           label: dynamodbConstants.LABEL,
           period: metricPeriod,
           dimensionsMap: {
             TableName: table,
-            Operation: "Query",
+            Operation: 'Query',
           },
-          statistic: "p95",
+          statistic: 'p95',
           color: leftColorHex,
           region: entry.resourceRegion,
         });
@@ -435,14 +435,14 @@ export class DynamodbDashboard extends Construct {
 
         let successfulRequestLatencyMetricScan = new cloudwatch.Metric({
           namespace: dynamodbConstants.NAMESPACE,
-          metricName: "SuccessfulRequestLatency",
+          metricName: 'SuccessfulRequestLatency',
           label: dynamodbConstants.LABEL,
           period: metricPeriod,
           dimensionsMap: {
             TableName: table,
-            Operation: "Scan",
+            Operation: 'Scan',
           },
-          statistic: "p95",
+          statistic: 'p95',
           color: leftColorHex,
           region: entry.resourceRegion,
         });
@@ -452,12 +452,12 @@ export class DynamodbDashboard extends Construct {
 
         let throttledRequestsMetricPutItem = new cloudwatch.Metric({
           namespace: dynamodbConstants.NAMESPACE,
-          metricName: "ThrottledRequests",
+          metricName: 'ThrottledRequests',
           label: dynamodbConstants.LABEL,
           period: metricPeriod,
           dimensionsMap: {
             TableName: table,
-            Operation: "PutItem",
+            Operation: 'PutItem',
           },
           statistic: cloudwatch.Statistic.SUM,
           color: rightColorHex,
@@ -465,12 +465,12 @@ export class DynamodbDashboard extends Construct {
         });
         let throttledRequestsMetricUpdateItem = new cloudwatch.Metric({
           namespace: dynamodbConstants.NAMESPACE,
-          metricName: "ThrottledRequests",
+          metricName: 'ThrottledRequests',
           label: dynamodbConstants.LABEL,
           period: metricPeriod,
           dimensionsMap: {
             TableName: table,
-            Operation: "UpdateItem",
+            Operation: 'UpdateItem',
           },
           statistic: cloudwatch.Statistic.SUM,
           color: rightColorHex,
@@ -478,12 +478,12 @@ export class DynamodbDashboard extends Construct {
         });
         let throttledRequestsMetricDeleteItem = new cloudwatch.Metric({
           namespace: dynamodbConstants.NAMESPACE,
-          metricName: "ThrottledRequests",
+          metricName: 'ThrottledRequests',
           label: dynamodbConstants.LABEL,
           period: metricPeriod,
           dimensionsMap: {
             TableName: table,
-            Operation: "DeleteItem",
+            Operation: 'DeleteItem',
           },
           statistic: cloudwatch.Statistic.SUM,
           color: rightColorHex,
@@ -491,27 +491,27 @@ export class DynamodbDashboard extends Construct {
         });
         let throttledRequestsMetricBatchWriteItem = new cloudwatch.Metric({
           namespace: dynamodbConstants.NAMESPACE,
-          metricName: "ThrottledRequests",
+          metricName: 'ThrottledRequests',
           label: dynamodbConstants.LABEL,
           period: metricPeriod,
           dimensionsMap: {
             TableName: table,
-            Operation: "BatchWriteItem",
+            Operation: 'BatchWriteItem',
           },
           statistic: cloudwatch.Statistic.SUM,
           color: rightColorHex,
           region: entry.resourceRegion,
         });
-        let t1: string = tableId + "WritePutItem";
-        let t2: string = tableId + "WriteUpdateItem";
-        let t3: string = tableId + "WriteDeleteItem";
-        let t4: string = tableId + "WriteBatchWriteItem";
+        let t1: string = tableId + 'WritePutItem';
+        let t2: string = tableId + 'WriteUpdateItem';
+        let t3: string = tableId + 'WriteDeleteItem';
+        let t4: string = tableId + 'WriteBatchWriteItem';
         let throttledRequestsMetricWriteExpression: string =
           'SUM(METRICS("TABLEID"))';
         throttledRequestsMetricWriteExpression =
           throttledRequestsMetricWriteExpression.replace(
             /\bTABLEID\b/g,
-            tableId + "Write",
+            tableId + 'Write',
           );
         let throttledRequestsMetricWrite = new cloudwatch.MathExpression({
           label: table,
@@ -529,12 +529,12 @@ export class DynamodbDashboard extends Construct {
 
         let throttledRequestsMetricGetItem = new cloudwatch.Metric({
           namespace: dynamodbConstants.NAMESPACE,
-          metricName: "ThrottledRequests",
+          metricName: 'ThrottledRequests',
           label: dynamodbConstants.LABEL,
           period: metricPeriod,
           dimensionsMap: {
             TableName: table,
-            Operation: "GetItem",
+            Operation: 'GetItem',
           },
           statistic: cloudwatch.Statistic.SUM,
           color: leftColorHex,
@@ -542,12 +542,12 @@ export class DynamodbDashboard extends Construct {
         });
         let throttledRequestsMetricScan = new cloudwatch.Metric({
           namespace: dynamodbConstants.NAMESPACE,
-          metricName: "ThrottledRequests",
+          metricName: 'ThrottledRequests',
           label: dynamodbConstants.LABEL,
           period: metricPeriod,
           dimensionsMap: {
             TableName: table,
-            Operation: "Scan",
+            Operation: 'Scan',
           },
           statistic: cloudwatch.Statistic.SUM,
           color: leftColorHex,
@@ -555,12 +555,12 @@ export class DynamodbDashboard extends Construct {
         });
         let throttledRequestsMetricQuery = new cloudwatch.Metric({
           namespace: dynamodbConstants.NAMESPACE,
-          metricName: "ThrottledRequests",
+          metricName: 'ThrottledRequests',
           label: dynamodbConstants.LABEL,
           period: metricPeriod,
           dimensionsMap: {
             TableName: table,
-            Operation: "Query",
+            Operation: 'Query',
           },
           statistic: cloudwatch.Statistic.SUM,
           color: leftColorHex,
@@ -568,27 +568,27 @@ export class DynamodbDashboard extends Construct {
         });
         let throttledRequestsMetricBatchGetItem = new cloudwatch.Metric({
           namespace: dynamodbConstants.NAMESPACE,
-          metricName: "ThrottledRequests",
+          metricName: 'ThrottledRequests',
           label: dynamodbConstants.LABEL,
           period: metricPeriod,
           dimensionsMap: {
             TableName: table,
-            Operation: "BatchGetItem",
+            Operation: 'BatchGetItem',
           },
           statistic: cloudwatch.Statistic.SUM,
           color: leftColorHex,
           region: entry.resourceRegion,
         });
-        let t5: string = tableId + "ReadGetItem";
-        let t6: string = tableId + "ReadScan";
-        let t7: string = tableId + "ReadDeleteItem";
-        let t8: string = tableId + "ReadBatchWriteItem";
+        let t5: string = tableId + 'ReadGetItem';
+        let t6: string = tableId + 'ReadScan';
+        let t7: string = tableId + 'ReadDeleteItem';
+        let t8: string = tableId + 'ReadBatchWriteItem';
         let throttledRequestsMetricReadExpression: string =
           'SUM(METRICS("TABLEID"))';
         throttledRequestsMetricReadExpression =
           throttledRequestsMetricReadExpression.replace(
             /\bTABLEID\b/g,
-            tableId + "Read",
+            tableId + 'Read',
           );
         let throttledRequestsMetricRead = new cloudwatch.MathExpression({
           label: table,
@@ -606,7 +606,7 @@ export class DynamodbDashboard extends Construct {
 
         let readThrottleEventsMetric = new cloudwatch.Metric({
           namespace: dynamodbConstants.NAMESPACE,
-          metricName: "ReadThrottleEvents",
+          metricName: 'ReadThrottleEvents',
           label: dynamodbConstants.LABEL,
           period: metricPeriod,
           dimensionsMap: {
@@ -620,7 +620,7 @@ export class DynamodbDashboard extends Construct {
 
         let writeThrottleEventsMetric = new cloudwatch.Metric({
           namespace: dynamodbConstants.NAMESPACE,
-          metricName: "WriteThrottleEvents",
+          metricName: 'WriteThrottleEvents',
           label: dynamodbConstants.LABEL,
           period: metricPeriod,
           dimensionsMap: {
@@ -634,7 +634,7 @@ export class DynamodbDashboard extends Construct {
 
         let consumedReadCapacityUnitsMetric = new cloudwatch.Metric({
           namespace: dynamodbConstants.NAMESPACE,
-          metricName: "ConsumedReadCapacityUnits",
+          metricName: 'ConsumedReadCapacityUnits',
           label: dynamodbConstants.LABEL,
           period: metricPeriod,
           dimensionsMap: {
@@ -646,7 +646,7 @@ export class DynamodbDashboard extends Construct {
         });
         let provisionedReadCapacityUnitsMetric = new cloudwatch.Metric({
           namespace: dynamodbConstants.NAMESPACE,
-          metricName: "ProvisionedReadCapacityUnits",
+          metricName: 'ProvisionedReadCapacityUnits',
           label: dynamodbConstants.LABEL,
           period: metricPeriod,
           dimensionsMap: {
@@ -656,10 +656,10 @@ export class DynamodbDashboard extends Construct {
           color: leftColorHex,
           region: entry.resourceRegion,
         });
-        let p1: string = tableId + "ProvisionedReadCapacityUnits";
-        let c1: string = tableId + "ConsumedReadCapacityUnits";
+        let p1: string = tableId + 'ProvisionedReadCapacityUnits';
+        let c1: string = tableId + 'ConsumedReadCapacityUnits';
         let consumedReadCapacityExpression: string =
-          "IF(p1 !=0, ((c1/PERIOD(c1)) / p1) * 100, 0)";
+          'IF(p1 !=0, ((c1/PERIOD(c1)) / p1) * 100, 0)';
         consumedReadCapacityExpression = consumedReadCapacityExpression
           .replace(/\bp1\b/g, p1)
           .replace(/\bc1\b/g, c1);
@@ -677,7 +677,7 @@ export class DynamodbDashboard extends Construct {
 
         let consumedWriteCapacityUnitsMetric = new cloudwatch.Metric({
           namespace: dynamodbConstants.NAMESPACE,
-          metricName: "ConsumedWriteCapacityUnits",
+          metricName: 'ConsumedWriteCapacityUnits',
           label: dynamodbConstants.LABEL,
           period: metricPeriod,
           dimensionsMap: {
@@ -689,7 +689,7 @@ export class DynamodbDashboard extends Construct {
         });
         let provisionedWriteCapacityUnitsMetric = new cloudwatch.Metric({
           namespace: dynamodbConstants.NAMESPACE,
-          metricName: "ProvisionedWriteCapacityUnits",
+          metricName: 'ProvisionedWriteCapacityUnits',
           label: dynamodbConstants.LABEL,
           period: metricPeriod,
           dimensionsMap: {
@@ -699,10 +699,10 @@ export class DynamodbDashboard extends Construct {
           color: rightColorHex,
           region: entry.resourceRegion,
         });
-        let p2: string = tableId + "ProvisionedWriteCapacityUnits";
-        let c2: string = tableId + "ConsumedWriteCapacityUnits";
+        let p2: string = tableId + 'ProvisionedWriteCapacityUnits';
+        let c2: string = tableId + 'ConsumedWriteCapacityUnits';
         let consumedWriteCapacityExpression: string =
-          "IF(p2 !=0, ((c2/PERIOD(c2)) / p2) * 100, 0)";
+          'IF(p2 !=0, ((c2/PERIOD(c2)) / p2) * 100, 0)';
         consumedWriteCapacityExpression = consumedWriteCapacityExpression
           .replace(/\bp2\b/g, p2)
           .replace(/\bc2\b/g, c2);
@@ -720,12 +720,12 @@ export class DynamodbDashboard extends Construct {
 
         let returnedBytesMetric = new cloudwatch.Metric({
           namespace: dynamodbConstants.NAMESPACE,
-          metricName: "ReturnedBytes",
+          metricName: 'ReturnedBytes',
           label: dynamodbConstants.LABEL,
           period: metricPeriod,
           dimensionsMap: {
             TableName: table,
-            Operation: "GetRecords",
+            Operation: 'GetRecords',
           },
           statistic: cloudwatch.Statistic.AVERAGE,
           color: leftColorHex,
@@ -735,12 +735,12 @@ export class DynamodbDashboard extends Construct {
 
         let returnedRecordsCountMetric = new cloudwatch.Metric({
           namespace: dynamodbConstants.NAMESPACE,
-          metricName: "ReturnedRecordsCount",
+          metricName: 'ReturnedRecordsCount',
           label: dynamodbConstants.LABEL,
           period: metricPeriod,
           dimensionsMap: {
             TableName: table,
-            Operation: "GetRecords",
+            Operation: 'GetRecords',
           },
           statistic: cloudwatch.Statistic.SUM,
           color: leftColorHex,
@@ -756,91 +756,91 @@ export class DynamodbDashboard extends Construct {
             // Metrics only for Alarms, hence no requirement of uniq id
 
             let sustainedReadThrottlingExpression: string =
-              "IF(c1 !=0, (rt1 / c1) * 100, 0)";
+              'IF(c1 !=0, (rt1 / c1) * 100, 0)';
             let sustainedReadThrottling = new cloudwatch.MathExpression({
               label: table,
               period: metricPeriod,
               expression: sustainedReadThrottlingExpression,
               usingMetrics: {
-                ["rt1"]: readThrottleEventsMetric.with({
+                ['rt1']: readThrottleEventsMetric.with({
                   statistic: cloudwatch.Statistic.SAMPLE_COUNT,
                 }),
-                ["c1"]: consumedReadCapacityUnitsMetric.with({
+                ['c1']: consumedReadCapacityUnitsMetric.with({
                   statistic: cloudwatch.Statistic.SAMPLE_COUNT,
                 }),
               },
             });
 
             let sustainedWriteThrottlingExpression: string =
-              "IF(c2 !=0, (wt1 / c2) * 100, 0)";
+              'IF(c2 !=0, (wt1 / c2) * 100, 0)';
             let sustainedWriteThrottling = new cloudwatch.MathExpression({
               label: table,
               period: metricPeriod,
               expression: sustainedWriteThrottlingExpression,
               usingMetrics: {
-                ["wt1"]: writeThrottleEventsMetric.with({
+                ['wt1']: writeThrottleEventsMetric.with({
                   statistic: cloudwatch.Statistic.SAMPLE_COUNT,
                 }),
-                ["c2"]: consumedWriteCapacityUnitsMetric.with({
+                ['c2']: consumedWriteCapacityUnitsMetric.with({
                   statistic: cloudwatch.Statistic.SAMPLE_COUNT,
                 }),
               },
             });
 
             let sustainedSystemErrorsExpression: string =
-              "IF(SUM([c1,c2]) !=0, (SUM([s1,s2,s3,s4,s6,s7,s8,s9]) / SUM([c1,c2])) * 100, 0)";
+              'IF(SUM([c1,c2]) !=0, (SUM([s1,s2,s3,s4,s6,s7,s8,s9]) / SUM([c1,c2])) * 100, 0)';
             let sustainedSystemErrors = new cloudwatch.MathExpression({
               label: table,
               period: metricPeriod,
               expression: sustainedSystemErrorsExpression,
               usingMetrics: {
-                ["c1"]: consumedReadCapacityUnitsMetric.with({
+                ['c1']: consumedReadCapacityUnitsMetric.with({
                   statistic: cloudwatch.Statistic.SAMPLE_COUNT,
                 }),
-                ["c2"]: consumedWriteCapacityUnitsMetric.with({
+                ['c2']: consumedWriteCapacityUnitsMetric.with({
                   statistic: cloudwatch.Statistic.SAMPLE_COUNT,
                 }),
-                ["s1"]: systemErrorsMetricPutItem.with({
+                ['s1']: systemErrorsMetricPutItem.with({
                   statistic: cloudwatch.Statistic.SAMPLE_COUNT,
                 }),
-                ["s2"]: systemErrorsMetricUpdateItem.with({
+                ['s2']: systemErrorsMetricUpdateItem.with({
                   statistic: cloudwatch.Statistic.SAMPLE_COUNT,
                 }),
-                ["s3"]: systemErrorsMetricDeleteItem.with({
+                ['s3']: systemErrorsMetricDeleteItem.with({
                   statistic: cloudwatch.Statistic.SAMPLE_COUNT,
                 }),
-                ["s4"]: systemErrorsMetricBatchWriteItem.with({
+                ['s4']: systemErrorsMetricBatchWriteItem.with({
                   statistic: cloudwatch.Statistic.SAMPLE_COUNT,
                 }),
-                ["s6"]: systemErrorsMetricGetItem.with({
+                ['s6']: systemErrorsMetricGetItem.with({
                   statistic: cloudwatch.Statistic.SAMPLE_COUNT,
                 }),
-                ["s7"]: systemErrorsMetricScan.with({
+                ['s7']: systemErrorsMetricScan.with({
                   statistic: cloudwatch.Statistic.SAMPLE_COUNT,
                 }),
-                ["s8"]: systemErrorsMetricQuery.with({
+                ['s8']: systemErrorsMetricQuery.with({
                   statistic: cloudwatch.Statistic.SAMPLE_COUNT,
                 }),
-                ["s9"]: systemErrorsMetricBatchGetItem.with({
+                ['s9']: systemErrorsMetricBatchGetItem.with({
                   statistic: cloudwatch.Statistic.SAMPLE_COUNT,
                 }),
               },
             });
 
             let sustainedUserErrorsExpression: string =
-              "IF(SUM([c1,c2]) !=0, (u1 / SUM([c1,c2])) * 100, 0)";
+              'IF(SUM([c1,c2]) !=0, (u1 / SUM([c1,c2])) * 100, 0)';
             let sustainedUserErrors = new cloudwatch.MathExpression({
               label: table,
               period: metricPeriod,
               expression: sustainedUserErrorsExpression,
               usingMetrics: {
-                ["u1"]: writeThrottleEventsMetric.with({
+                ['u1']: writeThrottleEventsMetric.with({
                   statistic: cloudwatch.Statistic.SAMPLE_COUNT,
                 }),
-                ["c1"]: consumedReadCapacityUnitsMetric.with({
+                ['c1']: consumedReadCapacityUnitsMetric.with({
                   statistic: cloudwatch.Statistic.SAMPLE_COUNT,
                 }),
-                ["c2"]: consumedWriteCapacityUnitsMetric.with({
+                ['c2']: consumedWriteCapacityUnitsMetric.with({
                   statistic: cloudwatch.Statistic.SAMPLE_COUNT,
                 }),
               },
@@ -848,9 +848,9 @@ export class DynamodbDashboard extends Construct {
 
             let sustainedReadThrottlingAlarm = new cloudwatch.Alarm(
               this,
-              "SustainedReadThrottling" + table,
+              'SustainedReadThrottling' + table,
               {
-                alarmName: "SustainedReadThrottling-" + tableId,
+                alarmName: 'SustainedReadThrottling-' + tableId,
                 comparisonOperator:
                   cloudwatch.ComparisonOperator.GREATER_THAN_THRESHOLD,
                 threshold: 2,
@@ -860,9 +860,9 @@ export class DynamodbDashboard extends Construct {
             );
             let sustainedWriteThrottlingAlarm = new cloudwatch.Alarm(
               this,
-              "SustainedWriteThrottling" + table,
+              'SustainedWriteThrottling' + table,
               {
-                alarmName: "SustainedWriteThrottling-" + tableId,
+                alarmName: 'SustainedWriteThrottling-' + tableId,
                 comparisonOperator:
                   cloudwatch.ComparisonOperator.GREATER_THAN_THRESHOLD,
                 threshold: 2,
@@ -873,9 +873,9 @@ export class DynamodbDashboard extends Construct {
 
             let sustainedSystemErrorsAlarm = new cloudwatch.Alarm(
               this,
-              "SustainedSystemErrors" + table,
+              'SustainedSystemErrors' + table,
               {
-                alarmName: "SustainedSystemErrors-" + tableId,
+                alarmName: 'SustainedSystemErrors-' + tableId,
                 comparisonOperator:
                   cloudwatch.ComparisonOperator.GREATER_THAN_THRESHOLD,
                 threshold: 2,
@@ -886,9 +886,9 @@ export class DynamodbDashboard extends Construct {
 
             let sustainedUserErrorsAlarm = new cloudwatch.Alarm(
               this,
-              "SustainedUserErrors" + table,
+              'SustainedUserErrors' + table,
               {
-                alarmName: "SustainedUserErrors-" + tableId,
+                alarmName: 'SustainedUserErrors-' + tableId,
                 comparisonOperator:
                   cloudwatch.ComparisonOperator.GREATER_THAN_THRESHOLD,
                 threshold: 2,
@@ -909,101 +909,101 @@ export class DynamodbDashboard extends Construct {
     }
 
     const systemErrorsWidget = new cloudwatch.GraphWidget({
-      title: "SystemErrors: Sum",
+      title: 'SystemErrors: Sum',
       left: systemErrorsMetricListLeft,
       right: systemErrorsMetricListRight,
       height: 6,
       width: 12,
-      leftYAxis: { label: "Read-Count", showUnits: false },
-      rightYAxis: { label: "Write-Count", showUnits: false },
+      leftYAxis: { label: 'Read-Count', showUnits: false },
+      rightYAxis: { label: 'Write-Count', showUnits: false },
     });
 
     const userErrorsWidget = new cloudwatch.GraphWidget({
-      title: "UserErrors: Max",
+      title: 'UserErrors: Max',
       left: userErrorsMetricList,
       height: 6,
       width: 6,
-      leftYAxis: { label: "Count", showUnits: false },
+      leftYAxis: { label: 'Count', showUnits: false },
     });
 
     const conditionalCheckFailedRequestsWidget = new cloudwatch.GraphWidget({
-      title: "ConditionalCheckFailedRequests: Max",
+      title: 'ConditionalCheckFailedRequests: Max',
       left: conditionalCheckFailedRequestsMetricList,
       height: 6,
       width: 6,
-      leftYAxis: { label: "Count", showUnits: false },
+      leftYAxis: { label: 'Count', showUnits: false },
     });
 
     const successfulRequestLatencyWidget = new cloudwatch.GraphWidget({
-      title: "Get & Put SuccessfulRequestLatency: Average",
+      title: 'Get & Put SuccessfulRequestLatency: Average',
       left: successfulRequestLatencyMetricLeft,
       right: successfulRequestLatencyMetricRight,
       height: 6,
       width: 12,
-      leftYAxis: { label: "Get-ms", showUnits: false },
-      rightYAxis: { label: "Put-ms", showUnits: false },
+      leftYAxis: { label: 'Get-ms', showUnits: false },
+      rightYAxis: { label: 'Put-ms', showUnits: false },
     });
 
     const successfulRequestLatencyQueryWidget = new cloudwatch.GraphWidget({
-      title: "Query SuccessfulRequestLatency: P95",
+      title: 'Query SuccessfulRequestLatency: P95',
       left: successfulRequestLatencyMetricQueryList,
       height: 6,
       width: 6,
-      leftYAxis: { label: "Milliseconds", showUnits: false },
+      leftYAxis: { label: 'Milliseconds', showUnits: false },
     });
 
     const successfulRequestLatencyScanWidget = new cloudwatch.GraphWidget({
-      title: "Scan SuccessfulRequestLatency: P95",
+      title: 'Scan SuccessfulRequestLatency: P95',
       left: successfulRequestLatencyMetricScanList,
       height: 6,
       width: 6,
-      leftYAxis: { label: "Milliseconds", showUnits: false },
+      leftYAxis: { label: 'Milliseconds', showUnits: false },
     });
 
     const throttledRequestsWidget = new cloudwatch.GraphWidget({
-      title: "ThrottledRequests: Sum",
+      title: 'ThrottledRequests: Sum',
       left: throttledRequestsMetricListLeft,
       right: throttledRequestsMetricListRight,
       height: 6,
       width: 12,
-      leftYAxis: { label: "Read-Count", showUnits: false },
-      rightYAxis: { label: "Write-Count", showUnits: false },
+      leftYAxis: { label: 'Read-Count', showUnits: false },
+      rightYAxis: { label: 'Write-Count', showUnits: false },
     });
 
     const throttledEventsWidget = new cloudwatch.GraphWidget({
-      title: "ThrottleEvents: Sum",
+      title: 'ThrottleEvents: Sum',
       left: readThrottleEventsMetricList,
       right: writeThrottleEventsMetricList,
       height: 6,
       width: 12,
-      leftYAxis: { label: "Read-Count", showUnits: false },
-      rightYAxis: { label: "Write-Count", showUnits: false },
+      leftYAxis: { label: 'Read-Count', showUnits: false },
+      rightYAxis: { label: 'Write-Count', showUnits: false },
     });
 
     const consumedCapacityWidget = new cloudwatch.GraphWidget({
-      title: "Consumed Read & Write Capacity: Percent",
+      title: 'Consumed Read & Write Capacity: Percent',
       left: consumedReadCapacityList,
       right: consumedWriteCapacityList,
       height: 6,
       width: 12,
-      leftYAxis: { label: "Read-Percent", showUnits: false },
-      rightYAxis: { label: "Write-Percent", showUnits: false },
+      leftYAxis: { label: 'Read-Percent', showUnits: false },
+      rightYAxis: { label: 'Write-Percent', showUnits: false },
     });
 
     const returnedBytesWidget = new cloudwatch.GraphWidget({
-      title: "Streams: GetRecords returned bytes: Average",
+      title: 'Streams: GetRecords returned bytes: Average',
       left: returnedBytesMetricList,
       height: 6,
       width: 6,
-      leftYAxis: { label: "Bytes", showUnits: false },
+      leftYAxis: { label: 'Bytes', showUnits: false },
     });
 
     const returnedRecordsCountWidget = new cloudwatch.GraphWidget({
-      title: "Streams: GetRecords returned records: Average",
+      title: 'Streams: GetRecords returned records: Average',
       left: returnedRecordsCountMetricList,
       height: 6,
       width: 6,
-      leftYAxis: { label: "Count", showUnits: false },
+      leftYAxis: { label: 'Count', showUnits: false },
     });
 
     const tableWidget = new cloudwatch.TextWidget({
@@ -1039,7 +1039,7 @@ export class DynamodbDashboard extends Construct {
 
     if (props.createAlarms === true) {
       const alarmWidget = new cloudwatch.AlarmStatusWidget({
-        title: "Alarms",
+        title: 'Alarms',
         height: utilities.getAlarmWidgetHeight(dynamodbAlarms),
         width: 24,
         alarms: dynamodbAlarms,

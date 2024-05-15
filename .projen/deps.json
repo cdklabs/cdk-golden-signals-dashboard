@@ -6,7 +6,7 @@
     },
     {
       "name": "@types/node",
-      "version": "^18",
+      "version": "^16",
       "type": "build"
     },
     {
@@ -75,7 +75,7 @@
     },
     {
       "name": "jsii",
-      "version": "~5.2",
+      "version": "5.1.x",
       "type": "build"
     },
     {

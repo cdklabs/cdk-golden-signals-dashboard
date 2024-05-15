@@ -1,11 +1,11 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: Apache-2.0
 
-import { IAlarm } from "aws-cdk-lib/aws-cloudwatch";
+import { IAlarm } from 'aws-cdk-lib/aws-cloudwatch';
 
 export function getRandomColor(): string {
-  let letters = "0123456789ABCDEF";
-  let color = "#";
+  let letters = '0123456789ABCDEF';
+  let color = '#';
   for (let i = 0; i < 6; i++) {
     color += letters[Math.floor(Math.random() * 16)];
   }
