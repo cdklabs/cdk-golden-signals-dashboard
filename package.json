@@ -67,7 +67,7 @@
     "jsii-rosetta": "5.1.24",
     "natural-compare-lite": "^1.4.0",
     "prettier": "^3.2.5",
-    "projen": "^0.81.11",
+    "projen": "^0.81.13",
     "standard-version": "^9",
     "ts-jest": "^27",
     "ts-node": "^10.9.2",
@@ -96,7 +96,7 @@
     },
     "testMatch": [
       "<rootDir>/src/**/__tests__/**/*.ts?(x)",
-      "<rootDir>/(test|src)/**/*(*.)@(spec|test).ts?(x)"
+      "<rootDir>/@(test|src)/**/*(*.)@(spec|test).ts?(x)"
     ],
     "clearMocks": true,
     "collectCoverage": true,
