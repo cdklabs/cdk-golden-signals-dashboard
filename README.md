@@ -40,4 +40,4 @@ app.synth();
 See [CONTRIBUTING](./CONTRIBUTING.md) for more information.
 
 # License Summary
-This project is licensed under the Apache-2.0 License. See the [LICENSE](LICENSE) file for our project's licensing.
+This project is licensed under the Apache-2.0 License. See the [LICENSE](LICENSE) file for our project's licensing.<!-- Updated: Fri May 30 12:30:44 CEST 2025 -->
