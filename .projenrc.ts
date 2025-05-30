@@ -68,7 +68,7 @@ const project = new CdklabsConstructLibrary({
     mavenGroupId: 'io.github.cdklabs',
     javaPackage: 'io.github.cdklabs.goldensignalsdashboard',
     mavenArtifactId: 'goldensignalsdashboard',
-    mavenEndpoint: 'https://s01.oss.sonatype.org',
+    mavenServerId: 'central-ossrh',
   },
 
   autoApproveOptions: {
