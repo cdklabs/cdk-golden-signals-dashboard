@@ -14,11 +14,10 @@ You can create tag based CloudWatch dashbord solution out of the box using this 
 <summary>Including in a CDK application</summary>
 
 ```typescript
-import { App, Stack, StackProps } from 'aws-cdk-lib';
-import { Construct } from 'constructs';
-import { GoldenSignalDashboard } from 'golden-signals-dashboard';
+import { App, StackProps } from 'aws-cdk-lib';
+import { GoldenSignalDashboard } from 'cdk-golden-signals-dashboard';
 
-export class MyStack extends Stack {
+class MyStack extends Stack {
   constructor(scope: Construct, id: string, props: StackProps = {}) {
     super(scope, id, props);
     new GoldenSignalDashboard(this, 'dynamodbDashboard', {
