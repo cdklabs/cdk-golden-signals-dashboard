@@ -4,7 +4,7 @@ import {
 } from 'cdklabs-projen-project-types';
 import { DependencyType, JsonFile, github } from 'projen';
 const project = new CdklabsConstructLibrary({
-  cdkVersion: '2.134.0',
+  cdkVersion: '2.189.1',
   setNodeEngineVersion: false,
   private: false,
   name: 'cdk-golden-signals-dashboard',
