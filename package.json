@@ -65,7 +65,7 @@
     "jsii-diff": "^1.114.1",
     "jsii-docgen": "^10.5.0",
     "jsii-pacmak": "^1.114.1",
-    "jsii-rosetta": "5.9.4",
+    "jsii-rosetta": "5.9.5",
     "natural-compare-lite": "^1.4.0",
     "prettier": "^3.6.2",
     "projen": "^0.87.4",
