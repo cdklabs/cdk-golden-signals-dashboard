@@ -23,12 +23,12 @@
   resolved "https://registry.yarnpkg.com/@aws-cdk/asset-node-proxy-agent-v6/-/asset-node-proxy-agent-v6-2.1.0.tgz#6d3c7860354d4856a7e75375f2f0ecab313b4989"
   integrity sha512-7bY3J8GCVxLupn/kNmpPc5VJz8grx+4RKfnnJiO1LG+uxkZfANZG3RMHhE+qQxxwkyQ9/MfPtTpf748UhR425A==
 
-"@aws-cdk/aws-service-spec@0.1.96":
-  version "0.1.96"
-  resolved "https://registry.yarnpkg.com/@aws-cdk/aws-service-spec/-/aws-service-spec-0.1.96.tgz#a4bb89a4d23ba035ab92d5dafb8f90bda2f7fa44"
-  integrity sha512-RIJR9YoCDqEPjqRFUXIXBjsh6ksa1V2weVvgDn9PbvCgiZzRIvzFa4DkNUBHc+K6kSIVucOda+jd52HLSZab/w==
+"@aws-cdk/aws-service-spec@0.1.98":
+  version "0.1.98"
+  resolved "https://registry.yarnpkg.com/@aws-cdk/aws-service-spec/-/aws-service-spec-0.1.98.tgz#cc8224815c5bab18167bd2f11eb85ea559b2a91d"
+  integrity sha512-oif2Gxp6Tb9FoT4iw1M/DPULshqK/DL7Bbo/3ss7uTHm5DDsI48tXU4ooEiiFNwLkMAp1Bp+76iG0wkgNqWwmw==
   dependencies:
-    "@aws-cdk/service-spec-types" "^0.0.162"
+    "@aws-cdk/service-spec-types" "^0.0.164"
     "@cdklabs/tskb" "^0.0.3"
 
 "@aws-cdk/cloud-assembly-schema@^41.0.0":
@@ -40,12 +40,12 @@
     semver "^7.7.1"
 
 "@aws-cdk/integ-runner@latest":
-  version "2.190.6"
-  resolved "https://registry.yarnpkg.com/@aws-cdk/integ-runner/-/integ-runner-2.190.6.tgz#78eb70b6cee5928527a8c79eb2d987768d8aefda"
-  integrity sha512-UNmTb3zUUsU6fGpEZGmILdvVh8amqrK7kcqlRXB4tKjJYBxWkx+njZVhU0OdIx01MaW1PJN/OssnsbZKXdspdg==
+  version "2.190.7"
+  resolved "https://registry.yarnpkg.com/@aws-cdk/integ-runner/-/integ-runner-2.190.7.tgz#53a95b01f6d211861559a316107677c57adbae28"
+  integrity sha512-rUKGvLNfYeXy/bBK2eRryiCEg3DiQZTCFNCJdp83GPzE9KjZUP57xOxfvcXb4db6MD9dhBYx22/vOBTsxJtLGA==
   dependencies:
-    "@aws-cdk/aws-service-spec" "0.1.96"
-    aws-cdk "2.1029.2"
+    "@aws-cdk/aws-service-spec" "0.1.98"
+    aws-cdk "2.1029.3"
   optionalDependencies:
     fsevents "2.3.2"
 
@@ -54,10 +54,10 @@
   resolved "https://registry.yarnpkg.com/@aws-cdk/integ-tests-alpha/-/integ-tests-alpha-2.41.0-alpha.0.tgz#86d01538c4aa19dadc9a8517235dd7ae4137f1ed"
   integrity sha512-z3b2Mg2H3CabB7DnsAv3IvPjP3KSByqbw7m75V8sWRwrmR0Z7vaK208RnmtkO0eik+C6Zb578zMc07eFQ9gbBA==
 
-"@aws-cdk/service-spec-types@^0.0.162":
-  version "0.0.162"
-  resolved "https://registry.yarnpkg.com/@aws-cdk/service-spec-types/-/service-spec-types-0.0.162.tgz#757498555635b28fcffbe78ddecd80212261591d"
-  integrity sha512-zGMhV7rk1hqmVNYPYT4q4zUO2KwJdLtCNB0tQ/4W+bpg2djT0rIjdtC0h7xPe7L5mCBm97PLlDG2c6ckWKkaKQ==
+"@aws-cdk/service-spec-types@^0.0.164":
+  version "0.0.164"
+  resolved "https://registry.yarnpkg.com/@aws-cdk/service-spec-types/-/service-spec-types-0.0.164.tgz#9c19b41234a1dd7fa5b0000c0ea61480058cdc15"
+  integrity sha512-Uy28KdwlotnGAH89PsIMH5bUEF8jb2W4FTaHrO8yRu70PgrnqH6j/xVWlyrp1JRd05CorZUhV9SWTdbCdzMU6Q==
   dependencies:
     "@cdklabs/tskb" "^0.0.3"
 
@@ -1413,10 +1413,10 @@ aws-cdk-lib@2.189.1:
     table "^6.9.0"
     yaml "1.10.2"
 
-aws-cdk@2.1029.2:
-  version "2.1029.2"
-  resolved "https://registry.yarnpkg.com/aws-cdk/-/aws-cdk-2.1029.2.tgz#9b7d0cc999ee1d51d54e0d48434fcad5efc7dcbd"
-  integrity sha512-VkgxcbDLygHtnIuZHDYosQSlYwqmnYogzgB4zq+n6prHUP3Q9R8b/eOeo5bG+5OhE+r6+ZXrrVSmfISyaxA0og==
+aws-cdk@2.1029.3:
+  version "2.1029.3"
+  resolved "https://registry.yarnpkg.com/aws-cdk/-/aws-cdk-2.1029.3.tgz#7e7642aa3836d2b564dde451ede87a5ac34624cb"
+  integrity sha512-otRJP5a4r07S+SLKs/WvJH+0auZHkaRMnv1vtD4fpp1figV8Vr9MKdB4QPNjfKdLGyK9f95OEHwVlIW9xpjPBg==
   optionalDependencies:
     fsevents "2.3.2"
 
@@ -5842,9 +5842,9 @@ typescript@4.9.5:
   integrity sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==
 
 typescript@next:
-  version "6.0.0-dev.20250923"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-6.0.0-dev.20250923.tgz#e7ec8a4f9078256f83553f7ba115efa4ac2b5d4b"
-  integrity sha512-Aiy0yklpKnRJkElhXO/bB2DhosYfL+j4RiUinq6C58ncyDOjuKn5wk6O5rds4n4AOobAqMjLU55H5q7bEyDcMQ==
+  version "6.0.0-dev.20250924"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-6.0.0-dev.20250924.tgz#714ad19bc8fde317058b6e8f79682a87f924fafa"
+  integrity sha512-QvrEXTC2T4iiFMS9P+VCcrwH1I9PnbDBeQB6n8d/7Dnv+lEBcF4hU7T8Y2pBgBYo+JT3L6t74ifscyU8mdv8kw==
 
 typescript@~5.1.6:
   version "5.1.6"
