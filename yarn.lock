@@ -5860,9 +5860,9 @@ typescript@4.9.5:
   integrity sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==
 
 typescript@next:
-  version "6.0.0-dev.20251018"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-6.0.0-dev.20251018.tgz#1f403239513cf62a187555261e6a5238eee0d943"
-  integrity sha512-lXYchuxch29qP9Dm4N7TSR6hoJl7j6QKCYAFEMRQyC1c5vB+MLdh+F/xet/IFnxaEIOcpRH3tfXNGCvJ4YtEjA==
+  version "6.0.0-dev.20251019"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-6.0.0-dev.20251019.tgz#1d469f2ee1d1c32baa4dd3df1aaa110cdb51dcfb"
+  integrity sha512-3GflyJCe8QdRUa6SnQoc/z6IidGEG/2ziHpHZeXRbu0pz848rvqumnEfxfM6Zua3nZPghun4fvLgEsVVSeLFJw==
 
 typescript@~5.1.6:
   version "5.1.6"
