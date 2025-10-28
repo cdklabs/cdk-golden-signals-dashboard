@@ -685,7 +685,7 @@
     chalk "^4.1.2"
     semver "^7.7.2"
 
-"@jsii/check-node@1.117.0", "@jsii/check-node@^1.116.0":
+"@jsii/check-node@1.117.0", "@jsii/check-node@^1.117.0":
   version "1.117.0"
   resolved "https://registry.yarnpkg.com/@jsii/check-node/-/check-node-1.117.0.tgz#44110172f6b4df86c3f0172599c64d2f08ce362c"
   integrity sha512-OtCwbCGGV41O4zuv11aioMFOSUHKm3cVBFmmwsls0ilcgzAKQ5Dk4/gqbzhpissiiDfFZuW+WjXO1lgTm8oRfw==
@@ -708,7 +708,7 @@
   dependencies:
     ajv "^8.17.1"
 
-"@jsii/spec@1.117.0", "@jsii/spec@^1.116.0", "@jsii/spec@^1.117.0", "@jsii/spec@^1.88.0":
+"@jsii/spec@1.117.0", "@jsii/spec@^1.117.0", "@jsii/spec@^1.88.0":
   version "1.117.0"
   resolved "https://registry.yarnpkg.com/@jsii/spec/-/spec-1.117.0.tgz#c2e73ceac03d48504d2f0d0a2fc6b0860ea38656"
   integrity sha512-Uru/sg3RN9Rr0smN3MS5gueeGdQdPHQ9fTVSxEOuzpxr5z1gej51rs73luj1cYPncMryHo+YkygpucCdLiQItg==
@@ -2224,9 +2224,9 @@ dunder-proto@^1.0.0, dunder-proto@^1.0.1:
     gopd "^1.2.0"
 
 electron-to-chromium@^1.5.238:
-  version "1.5.240"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.5.240.tgz#bfd946570a723aa3754370065d02e23e30824774"
-  integrity sha512-OBwbZjWgrCOH+g6uJsA2/7Twpas2OlepS9uvByJjR2datRDuKGYeD+nP8lBBks2qnB7bGJNHDUx7c/YLaT3QMQ==
+  version "1.5.241"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.5.241.tgz#350a2cdcde43829d36af245a27167243e917c6ed"
+  integrity sha512-ILMvKX/ZV5WIJzzdtuHg8xquk2y0BOGlFOxBVwTpbiXqWIH0hamG45ddU4R3PQ0gYu+xgo0vdHXHli9sHIGb4w==
 
 emittery@^0.8.1:
   version "0.8.1"
@@ -4074,13 +4074,13 @@ jsii-reflect@^1.117.0:
     oo-ascii-tree "^1.117.0"
     yargs "^17.7.2"
 
-jsii-rosetta@5.9.11:
-  version "5.9.11"
-  resolved "https://registry.yarnpkg.com/jsii-rosetta/-/jsii-rosetta-5.9.11.tgz#999a3fa0309db50de3464dca96ee75b0286f93c7"
-  integrity sha512-J0WXTYm6XEq+yyifSA5Wu9H8w3forNU1Efn4kOb8P5FZLDdZHGy5IpX0nWaYejlNMPVwy1ZoLjaJSHADVoul5Q==
+jsii-rosetta@5.9.12:
+  version "5.9.12"
+  resolved "https://registry.yarnpkg.com/jsii-rosetta/-/jsii-rosetta-5.9.12.tgz#511233f17f96dd9ef4984daa3c2794b157bab650"
+  integrity sha512-unbIDr/AANCb4Apv+hrjrEBoWRLh0sAFhwWIYleT26MJUJVbq5EVb1U7ZPUb0uSoVhKF9KJmOicYSzROPb64Gg==
   dependencies:
-    "@jsii/check-node" "^1.116.0"
-    "@jsii/spec" "^1.116.0"
+    "@jsii/check-node" "^1.117.0"
+    "@jsii/spec" "^1.117.0"
     "@xmldom/xmldom" "^0.9.8"
     chalk "^4"
     commonmark "^0.31.2"
@@ -5860,9 +5860,9 @@ typescript@4.9.5:
   integrity sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==
 
 typescript@next:
-  version "6.0.0-dev.20251026"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-6.0.0-dev.20251026.tgz#45f80d8e6058c92030120bea46edd98baa840d47"
-  integrity sha512-EgBm80Rqut42XmBLyutIOP7/PYrXI3AJVhbP9XP60v0B1pGrM422AG116s/bU+/6Al+1zAjaRYj2aZ9RklQn5w==
+  version "6.0.0-dev.20251027"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-6.0.0-dev.20251027.tgz#e643fc72ba29fb3ba5ca5fd57db496fbf42a1b81"
+  integrity sha512-rGAY+HgHFOCqrFDxjuCkzLetu5z6GpLt+0EKp/ybP8BXvsSfs+lkWd+C8vKka8l4Hn4eXS/+v3YLEHwyhT2jIg==
 
 typescript@~5.1.6:
   version "5.1.6"
