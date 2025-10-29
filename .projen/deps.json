@@ -46,6 +46,7 @@
     },
     {
       "name": "eslint-plugin-security",
+      "version": "^3.0.1",
       "type": "build"
     },
     {
