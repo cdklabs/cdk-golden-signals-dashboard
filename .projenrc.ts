@@ -37,8 +37,11 @@ const project = new CdklabsConstructLibrary({
   majorVersion: 1,
   npmignoreEnabled: true,
 
-  devDeps: ['eslint-plugin-security', 'natural-compare-lite'],
-  eslintOptions: { prettier: true, dirs: ['src', 'projenrc'] },
+  devDeps: ['eslint-plugin-security@^3.0.1', 'natural-compare-lite'],
+  eslintOptions: {
+    prettier: true,
+    dirs: ['src', 'projenrc'],
+  },
 
   pullRequestTemplateContents: [
     '',
@@ -107,7 +110,7 @@ const project = new CdklabsConstructLibrary({
 // trick projen so that it doesn't override the version in package.json
 project.tasks.addEnvironment('RELEASE', '1');
 
-project.eslint?.addExtends('plugin:security/recommended');
+project.eslint?.addExtends('plugin:security/recommended-legacy');
 const common_exclude = [
   'cdk.out',
   'cdk.context.json',
@@ -129,4 +132,7 @@ new JsonFile(project, 'test/integ/tsconfig.json', {
 });
 project.gitignore.exclude(...common_exclude);
 project.npmignore!.exclude(...common_exclude, 'image');
+// Set environment variable for ESLint to use legacy config format
+project.tasks.tryFind('eslint')?.env('ESLINT_USE_FLAT_CONFIG', 'false');
+
 project.synth();
