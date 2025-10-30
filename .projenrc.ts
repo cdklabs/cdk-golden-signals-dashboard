@@ -136,3 +136,4 @@ project.npmignore!.exclude(...common_exclude, 'image');
 project.tasks.tryFind('eslint')?.env('ESLINT_USE_FLAT_CONFIG', 'false');
 
 project.synth();
+
