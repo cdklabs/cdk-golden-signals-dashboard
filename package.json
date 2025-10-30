@@ -91,7 +91,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "0.0.0",
+  "version": "0.1.0",
   "jest": {
     "coverageProvider": "v8",
     "maxConcurrency": 2,
@@ -152,8 +152,8 @@
         }
       },
       "python": {
-        "distName": "cdk-golden-signals-dashboard",
-        "module": "cdk-golden-signals-dashboard"
+        "distName": "cdk_golden_signals_dashboard",
+        "module": "cdk_golden_signals_dashboard"
       },
       "dotnet": {
         "namespace": "Cdklabs.GoldenSignalsDashboard",

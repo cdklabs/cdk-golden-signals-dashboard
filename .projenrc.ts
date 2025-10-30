@@ -60,8 +60,8 @@ const project = new CdklabsConstructLibrary({
   ],
   // jsii publishing
   publishToPypi: {
-    distName: 'cdk-golden-signals-dashboard',
-    module: 'cdk-golden-signals-dashboard',
+    distName: 'cdk_golden_signals_dashboard',
+    module: 'cdk_golden_signals_dashboard',
   },
   publishToNuget: {
     packageId: 'Cdklabs.GoldenSignalsDashboard',
