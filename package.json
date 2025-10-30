@@ -152,8 +152,8 @@
         }
       },
       "python": {
-        "distName": "cdk-golden-signals-dashboard",
-        "module": "cdk-golden-signals-dashboard"
+        "distName": "cdk_golden_signals_dashboard",
+        "module": "cdk_golden_signals_dashboard"
       },
       "dotnet": {
         "namespace": "Cdklabs.GoldenSignalsDashboard",
